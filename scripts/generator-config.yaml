@@ -1,0 +1,8 @@
+generatorName: typescript-fetch
+inputSpec: openapi/openapi.yaml
+outputDir: src/openapi
+additionalProperties:
+  npmName: "@finch_ren/x-scraper"
+  supportsES6: true
+  withoutRuntimeChecks: false
+  legacyDiscriminatorBehavior: false

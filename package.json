@@ -1,0 +1,41 @@
+{
+  "name": "@finch_ren/x-scraper",
+  "version": "0.1.0",
+  "description": "A TypeScript SDK for X (Twitter) internal GraphQL endpoints with cookie-based authentication.",
+  "keywords": [
+    "twitter",
+    "x",
+    "api",
+    "typescript",
+    "scraper"
+  ],
+  "author": "",
+  "license": "custom license or AGPL-3.0-or-later",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "!dist/**/*.map"
+  ],
+  "scripts": {
+    "generate": "openapi-generator-cli generate -g typescript-fetch -i openapi/openapi.yaml -o src/openapi --config scripts/generator-config.yaml",
+    "build": "tsc -p tsconfig.build.json && npx tscpaths -p tsconfig.build.json -s . -o ./dist",
+    "test": "jest",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "x-client-transaction-id-generater": "^0.0.7"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.15.3",
+    "@types/jest": "*",
+    "@types/log4js": "^2.3.5",
+    "@types/node": "*",
+    "jest": "^29.7.0",
+    "log4js": "^6.9.1",
+    "ts-jest": "*",
+    "tscpaths": "*",
+    "typescript": "^5.6.0"
+  }
+}

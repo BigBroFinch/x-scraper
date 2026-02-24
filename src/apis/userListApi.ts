@@ -1,0 +1,145 @@
+import {
+  DefaultFlag,
+  RequestParam,
+  TimelineApiUtilsResponse,
+  TwitterApiUtilsResponse,
+  UserApiUtilsData,
+} from '@/models';
+import {
+  buildHeader,
+  entriesCursor,
+  errorCheck,
+  getKwargs,
+  InitOverridesType,
+  instructionToEntry,
+  userEntriesConverter,
+  userResultConverter,
+} from '@/utils';
+import * as i from '@/openapi';
+
+type GetFollowersParam = { userId: string; cursor?: string; count?: number; extraParam?: { [key: string]: any } };
+type GetFollowingParam = { userId: string; cursor?: string; count?: number; extraParam?: { [key: string]: any } };
+type GetFollowersYouKnowParam = { userId: string; cursor?: string; count?: number; extraParam?: { [key: string]: any } };
+type GetBlueVerifiedFollowersParam = { userId: string; cursor?: string; count?: number; extraParam?: { [key: string]: any } };
+type GetFavoritersParam = { tweetId: string; cursor?: string; count?: number; extraParam?: { [key: string]: any } };
+type GetRetweetersParam = { tweetId: string; cursor?: string; count?: number; extraParam?: { [key: string]: any } };
+
+type ResponseType = TwitterApiUtilsResponse<TimelineApiUtilsResponse<UserApiUtilsData>>;
+
+export class UserListApiUtils {
+  api: i.UserListApi;
+  flag: DefaultFlag;
+  initOverrides: InitOverridesType;
+
+  constructor(api: i.UserListApi, flag: DefaultFlag, initOverrides: InitOverridesType) {
+    this.api = api;
+    this.flag = flag;
+    this.initOverrides = initOverrides;
+  }
+
+  async request<T>(param: RequestParam<i.InstructionUnion[], T>): Promise<ResponseType> {
+    const apiFn: typeof param.apiFn = param.apiFn.bind(this.api);
+    const args = getKwargs(this.flag[param.key], param.param);
+    const response = await apiFn(args, this.initOverrides(this.flag[param.key]));
+    const instruction = param.convertFn(await response.value());
+    const entry = instructionToEntry(instruction);
+    const userList = userEntriesConverter(entry);
+    const data = userResultConverter(userList);
+
+    return {
+      raw: { response: response.raw },
+      header: buildHeader(response.raw.headers),
+      data: { raw: { instruction, entry }, data, cursor: entriesCursor(entry) },
+    };
+  }
+
+  async getFollowers(param: GetFollowersParam): Promise<ResponseType> {
+    const args = {
+      userId: param.userId,
+      ...(param.cursor == undefined ? {} : { cursor: param.cursor }),
+      ...(param.count == undefined ? {} : { count: param.count }),
+      ...param.extraParam,
+    };
+    return this.request({
+      apiFn: this.api.getFollowersRaw,
+      convertFn: (e) => errorCheck(e.data.user, e.errors).result.timeline.timeline.instructions,
+      key: 'Followers',
+      param: args,
+    });
+  }
+
+  async getBlueVerifiedFollowers(param: GetBlueVerifiedFollowersParam): Promise<ResponseType> {
+    const args = {
+      userId: param.userId,
+      ...(param.cursor == undefined ? {} : { cursor: param.cursor }),
+      ...(param.count == undefined ? {} : { count: param.count }),
+      ...param.extraParam,
+    };
+    return this.request({
+      apiFn: this.api.getBlueVerifiedFollowersRaw,
+      convertFn: (e) => errorCheck(e.data.user, e.errors).result.timeline.timeline.instructions,
+      key: 'BlueVerifiedFollowers',
+      param: args,
+    });
+  }
+
+  async getFollowing(param: GetFollowingParam): Promise<ResponseType> {
+    const args = {
+      userId: param.userId,
+      ...(param.cursor == undefined ? {} : { cursor: param.cursor }),
+      ...(param.count == undefined ? {} : { count: param.count }),
+      ...param.extraParam,
+    };
+    return this.request({
+      apiFn: this.api.getFollowingRaw,
+      convertFn: (e) => errorCheck(e.data.user, e.errors).result.timeline.timeline.instructions,
+      key: 'Following',
+      param: args,
+    });
+  }
+
+  async getFollowersYouKnow(param: GetFollowersYouKnowParam): Promise<ResponseType> {
+    const args = {
+      userId: param.userId,
+      ...(param.cursor == undefined ? {} : { cursor: param.cursor }),
+      ...(param.count == undefined ? {} : { count: param.count }),
+      ...param.extraParam,
+    };
+    return this.request({
+      apiFn: this.api.getFollowersYouKnowRaw,
+      convertFn: (e) => errorCheck(e.data.user, e.errors).result.timeline.timeline.instructions,
+      key: 'FollowersYouKnow',
+      param: args,
+    });
+  }
+
+  async getFavoriters(param: GetFavoritersParam): Promise<ResponseType> {
+    const args = {
+      tweetId: param.tweetId,
+      ...(param.cursor == undefined ? {} : { cursor: param.cursor }),
+      ...(param.count == undefined ? {} : { count: param.count }),
+      ...param.extraParam,
+    };
+    return this.request({
+      apiFn: this.api.getFavoritersRaw,
+      convertFn: (e) => errorCheck(e.data.favoritersTimeline?.timeline, e.errors).instructions,
+      key: 'Favoriters',
+      param: args,
+    });
+  }
+
+  async getRetweeters(param: GetRetweetersParam): Promise<ResponseType> {
+    const args = {
+      tweetId: param.tweetId,
+      ...(param.cursor == undefined ? {} : { cursor: param.cursor }),
+      ...(param.count == undefined ? {} : { count: param.count }),
+      ...param.extraParam,
+    };
+    return this.request({
+      apiFn: this.api.getRetweetersRaw,
+      convertFn: (e) => errorCheck(e.data.retweetersTimeline?.timeline, e.errors).instructions,
+      key: 'Retweeters',
+      param: args,
+    });
+  }
+}
