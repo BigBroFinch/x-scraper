@@ -40,6 +40,87 @@ yarn add @finch_ren/x-scraper
 
 </details>
 
+## 简调用示例
+
+```ts
+import { XScraper } from '@finch_ren/x-scraper';
+
+async function main() {
+  const scraper = new XScraper();
+  const client = await scraper.getClientFromCookies({
+    __cf_bm: '<__cf_bm>',
+    __cuid: '<__cuid>',
+    _ga: '<_ga>',
+    _ga_BLY4P7T5KW: '<_ga_BLY4P7T5KW>',
+    _twitter_sess: '<_twitter_sess>',
+    auth_token: '<auth_token>',
+    ct0: '<ct0>',
+    guest_id: '<guest_id>',
+    guest_id_ads: '<guest_id_ads>',
+    guest_id_marketing: '<guest_id_marketing>',
+    kdt: '<kdt>',
+    lang: '<lang>',
+    personalization_id: '<personalization_id>',
+    twid: '<twid>',
+  });
+
+  const res = await client.getTweetDetail({
+    focalTweetId: '2018440335140024383',
+  });
+}
+
+main().catch(console.error);
+```
+
+<details open>
+<summary><strong>返回结果示例（JSON）（仅作展示，请以实际返回结果为准）</strong></summary>
+
+```json
+{
+  "raw": {
+    "instruction": [
+      { "type": "TimelineClearCache" },
+      { "type": "TimelineAddEntries", "entries": [/* ... */] },
+      { "type": "TimelineTerminateTimeline" }
+    ]
+  },
+  "cursor": {
+    "bottom": {
+      "typename": "TimelineTimelineCursor",
+      "cursorType": "Bottom",
+      "entryType": "TimelineTimelineCursor",
+      "value": "DAAKCgABHB6qs_W__pULAAIAAAGoRW1QQzZ3QUFBZlEvZ0dKTjB2R3AvQUFBQUNVY0F2UXhkOXN4dEJ3Qzl4Y3gyNkJ0SEFNbGdrOFhvU3djQXZHZ0hCZWhBeHdDODE5MVd1SGRIQUwzU3c4Ym9UMGNBdlkrcGhyeDBCd0M4VXJZMXFFZEhBTTJhdnlhTVVBY0F2Z24zSnN3TUJ3Qys2aFJHbEdvSEFOYjhqZmFrVjRjQXZtYzBadkF3UndDOE96NDJsRmtIQUwvWUxVV3NkY2NBeEM2dFJ0d1N4d0MrdFY4R3BFYUhBTDdySXNhMGNzY0F2REthRmR3UHh3REEwNnAydEFxSEFOSDA4eWFZV3NjQXhFN3I5c1JTaHdEQVpFSkc4RXFIQUwwNXpmYTBZd2NBdmJ6SHBxeFJod0M5V1BmVzREWkhBTUJ6b3ZhRVl3Y0F2R3Z0TmN4MGh3QzgzM0Myb0V0SEFMOGNBYmJzUDRjQTdxQm1ScUEyQndDK0Y1SzI4QnJIQUx5OFl5YkVaQWNBdjY5THRyeGJSd0RCQ24wVzBGdUhBTDR6TGJiRVBvY0F2UFZqRnRCVWc9PQgAAwAAAAILAAQAAAAGQm90dG9tAAA"
+    }
+  },
+  "data": [
+    {
+      "raw": { "typename": "Tweet", "restId": "2018440335140024383" },
+      "tweet": {
+        "id": "2018440335140024383",
+        "text": "SpaceX has acquired xAI, forming one of the most ambitious...",
+        "createdAt": "Mon Feb 02 21:44:11 +0000 2026",
+        "favoriteCount": 44183,
+        "retweetCount": 7746,
+        "replyCount": 3354
+      },
+      "user": {
+        "id": "34743251",
+        "name": "SpaceX",
+        "screenName": "SpaceX",
+        "followersCount": 41074731
+      }
+    },
+    {
+      "raw": { /* ... */ },
+      "tweet": { /* ... */ },
+      "user": { /* ... */ }
+    }
+  ]
+}
+```
+
+</details>
+
 ## 快速开始
 
 ### Guest 模式
@@ -101,9 +182,20 @@ async function main() {
   const scraper = new XScraper();
 
   const client = await scraper.getClientFromCookies({
-    ct0: '<csrf_token>',
+    __cf_bm: '<__cf_bm>',
+    __cuid: '<__cuid>',
+    _ga: '<_ga>',
+    _ga_BLY4P7T5KW: '<_ga_BLY4P7T5KW>',
+    _twitter_sess: '<_twitter_sess>',
     auth_token: '<auth_token>',
-    ....
+    ct0: '<ct0>',
+    guest_id: '<guest_id>',
+    guest_id_ads: '<guest_id_ads>',
+    guest_id_marketing: '<guest_id_marketing>',
+    kdt: '<kdt>',
+    lang: '<lang>',
+    personalization_id: '<personalization_id>',
+    twid: '<twid>',
   });
 
   const profile = await client.getUserByScreenName({ screenName: 'jack' });
