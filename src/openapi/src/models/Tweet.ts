@@ -348,6 +348,18 @@ export function TweetFromJSONTyped(json: any, ignoreDiscriminator: boolean): Twe
     if (json == null) {
         return json;
     }
+    let core: UserResultCore | undefined;
+    try {
+        core = json['core'] == null ? undefined : UserResultCoreFromJSON(json['core']);
+    } catch {
+        core = json['core'];
+    }
+    let quotedStatusResult: ItemResult | undefined;
+    try {
+        quotedStatusResult = json['quoted_status_result'] == null ? undefined : ItemResultFromJSON(json['quoted_status_result']);
+    } catch {
+        quotedStatusResult = json['quoted_status_result'];
+    }
     return {
         
         'typename': json['__typename'] == null ? undefined : TypeNameFromJSON(json['__typename']),
@@ -357,7 +369,7 @@ export function TweetFromJSONTyped(json: any, ignoreDiscriminator: boolean): Twe
         'card': json['card'] == null ? undefined : TweetCardFromJSON(json['card']),
         'communityRelationship': json['community_relationship'] == null ? undefined : CommunityRelationshipFromJSON(json['community_relationship']),
         'communityResults': json['community_results'] == null ? undefined : CommunityFromJSON(json['community_results']),
-        'core': json['core'] == null ? undefined : UserResultCoreFromJSON(json['core']),
+        'core': core,
         'editControl': json['edit_control'] == null ? undefined : TweetEditControlFromJSON(json['edit_control']),
         'editPrespective': json['edit_prespective'] == null ? undefined : TweetEditPrespectiveFromJSON(json['edit_prespective']),
         'grokAnalysisButton': json['grok_analysis_button'] == null ? undefined : json['grok_analysis_button'],
@@ -370,7 +382,7 @@ export function TweetFromJSONTyped(json: any, ignoreDiscriminator: boolean): Twe
         'previousCounts': json['previous_counts'] == null ? undefined : TweetPreviousCountsFromJSON(json['previous_counts']),
         'quickPromoteEligibility': json['quick_promote_eligibility'] == null ? undefined : json['quick_promote_eligibility'],
         'quotedRefResult': json['quotedRefResult'] == null ? undefined : QuotedRefResultFromJSON(json['quotedRefResult']),
-        'quotedStatusResult': json['quoted_status_result'] == null ? undefined : ItemResultFromJSON(json['quoted_status_result']),
+        'quotedStatusResult': quotedStatusResult,
         'restId': json['rest_id'],
         'source': json['source'] == null ? undefined : json['source'],
         'superFollowsReplyUserResult': json['superFollowsReplyUserResult'] == null ? undefined : SuperFollowsReplyUserResultFromJSON(json['superFollowsReplyUserResult']),
@@ -422,4 +434,3 @@ export function TweetToJSONTyped(value?: Tweet | null, ignoreDiscriminator: bool
         'views': TweetViewToJSON(value['views']),
     };
 }
-

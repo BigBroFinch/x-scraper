@@ -65,10 +65,16 @@ export function ItemResultFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     if (json == null) {
         return json;
     }
+    let result: TweetUnion | undefined;
+    try {
+        result = json['result'] == null ? undefined : TweetUnionFromJSON(json['result']);
+    } catch {
+        result = json['result'];
+    }
     return {
         
         'typename': json['__typename'] == null ? undefined : TypeNameFromJSON(json['__typename']),
-        'result': json['result'] == null ? undefined : TweetUnionFromJSON(json['result']),
+        'result': result,
     };
 }
 
@@ -87,4 +93,3 @@ export function ItemResultToJSONTyped(value?: ItemResult | null, ignoreDiscrimin
         'result': TweetUnionToJSON(value['result']),
     };
 }
-

@@ -41,12 +41,12 @@ export const instructionConverter = (item: i.InstructionUnion[]): TweetApiUtilsD
   return item
     .flatMap((e) => {
       if (e.type == i.InstructionType.TimelineAddEntries) {
-        return [];
+        return tweetEntriesConverter((e as i.TimelineAddEntries).entries);
       } else if (e.type == i.InstructionType.TimelineAddToModule) {
         const item = (e as i.TimelineAddToModule).moduleItems ?? [];
         return moduleConverter(item);
       } else if (e.type == i.InstructionType.TimelineReplaceEntry) {
-        return [];
+        return tweetEntriesConverter([(e as i.TimelineReplaceEntry).entry]);
       }
       return [];
     })
@@ -54,50 +54,94 @@ export const instructionConverter = (item: i.InstructionUnion[]): TweetApiUtilsD
     .flat();
 };
 
-export const tweetEntriesConverter = (item: i.TimelineAddEntry[]): TweetApiUtilsData[] => {
-  return item
+const isTimelineAddEntry = (value: any): value is i.TimelineAddEntry => {
+  return value != undefined && typeof value == 'object' && 'content' in value && 'entryId' in value;
+};
+
+const isInstructionLike = (value: any): boolean => {
+  return value != undefined && typeof value == 'object' && typeof value.type == 'string';
+};
+
+const normalizeTimelineEntries = (value: any): i.TimelineAddEntry[] => {
+  if (value == undefined) return [];
+
+  if (Array.isArray(value)) {
+    if (value.length == 0) return [];
+    if (value.every(isTimelineAddEntry)) {
+      return value;
+    }
+    if (value.every(isInstructionLike)) {
+      return instructionToEntry(value as i.InstructionUnion[]);
+    }
+    return [];
+  }
+
+  if (typeof value != 'object') return [];
+
+  if (Array.isArray(value.instructions)) {
+    return instructionToEntry(value.instructions as i.InstructionUnion[]);
+  }
+
+  if (Array.isArray(value.entries)) {
+    return value.entries as i.TimelineAddEntry[];
+  }
+
+  if (value.entry != undefined) {
+    return [value.entry as i.TimelineAddEntry];
+  }
+
+  if (isTimelineAddEntry(value)) {
+    return [value];
+  }
+
+  return [];
+};
+
+export const tweetEntriesConverter = (item: i.TimelineAddEntry[] | any): TweetApiUtilsData[] => {
+  return normalizeTimelineEntries(item)
     .map((e) => {
       if (e.content.entryType == i.ContentEntryType.TimelineTimelineItem) {
         const item = (e.content as i.TimelineTimelineItem).itemContent;
-        const timeline = item.itemType == i.ContentItemType.TimelineTweet ? (item as i.TimelineTweet) : undefined;
+        const timeline = item.itemType == i.ContentItemType.TimelineTweet ? (item as i.TimelineTweet | any) : undefined;
         if (timeline == undefined) return undefined;
         return [
           buildTweetApiUtils({
-            result: timeline.tweetResults,
-            promotedMetadata: timeline.promotedMetadata,
+            result: getTimelineTweetResult(timeline),
+            promotedMetadata: getTimelinePromotedMetadata(timeline),
           }),
         ];
       } else if (e.content.entryType == i.ContentEntryType.TimelineTimelineModule) {
         const item = (e.content as i.TimelineTimelineModule).items ?? [];
         return moduleConverter(item);
       }
+      return undefined;
     })
     .filter((e): e is NonNullable<typeof e> => e != undefined)
     .map((e) => e.filter((e): e is NonNullable<typeof e> => e != undefined))
     .flat();
 };
 
-export const moduleConverter = (item: i.ModuleItem[]): TweetApiUtilsData[] => {
-  const timelineList = item
-    .filter((e) => e.item.itemContent.itemType == i.ContentItemType.TimelineTweet)
-    .map((e) => e.item.itemContent as i.TimelineTweet);
+export const moduleConverter = (item: i.ModuleItem[] | any): TweetApiUtilsData[] => {
+  const timelineList = (item ?? [])
+    .filter((e: any) => e?.item?.itemContent?.itemType == i.ContentItemType.TimelineTweet)
+    .map((e: any) => e.item.itemContent as i.TimelineTweet | any);
   if (timelineList.length == 0) return [];
 
   if (timelineList[0].tweetDisplayType == i.TimelineTweetTweetDisplayTypeEnum.MediaGrid) {
     return timelineList
-      .map((e) =>
+      .map((e: i.TimelineTweet | any) =>
         buildTweetApiUtils({
-          result: e.tweetResults,
-          promotedMetadata: e.promotedMetadata,
+          result: getTimelineTweetResult(e),
+          promotedMetadata: getTimelinePromotedMetadata(e),
         }),
       )
-      .filter((e): e is NonNullable<typeof e> => e != undefined);
+      .filter((e: TweetApiUtilsData | undefined): e is NonNullable<typeof e> => e != undefined);
   } else {
     const timeline = timelineList[0];
     return [
       buildTweetApiUtils({
-        result: timeline.tweetResults,
-        promotedMetadata: timeline.promotedMetadata,
+        result: getTimelineTweetResult(timeline),
+        promotedMetadata: getTimelinePromotedMetadata(timeline),
         reply: timelineList.slice(1),
       }),
     ].filter((e): e is NonNullable<typeof e> => e != undefined);
@@ -105,23 +149,44 @@ export const moduleConverter = (item: i.ModuleItem[]): TweetApiUtilsData[] => {
 };
 
 type buildTweetApiUtilsArgs = {
-  result: i.ItemResult;
+  result: i.ItemResult | any;
   promotedMetadata?: any;
-  reply?: i.TimelineTweet[];
+  reply?: Array<i.TimelineTweet | any>;
+};
+
+const getTimelineTweetResult = (timeline: i.TimelineTweet | any): i.ItemResult | any => {
+  return timeline?.tweetResults ?? timeline?.tweet_results;
+};
+
+const getTimelinePromotedMetadata = (timeline: i.TimelineTweet | any): any => {
+  return timeline?.promotedMetadata ?? timeline?.promoted_metadata;
+};
+
+const getTweetUserResult = (tweet: i.Tweet | any): i.UserUnion | any => {
+  return tweet?.core?.userResults?.result ?? tweet?.core?.user_results?.result;
+};
+
+const getQuotedStatusResult = (tweet: i.Tweet | any): i.ItemResult | any => {
+  return tweet?.quotedStatusResult ?? tweet?.quoted_status_result;
+};
+
+const getRetweetedStatusResult = (tweet: i.Tweet | any): i.ItemResult | any => {
+  return tweet?.legacy?.retweetedStatusResult ?? tweet?.legacy?.retweeted_status_result;
 };
 
 export const buildTweetApiUtils = (args: buildTweetApiUtilsArgs): TweetApiUtilsData | undefined => {
+  if (args.result == undefined) return undefined;
   const tweet = tweetResultsConverter(args.result);
   if (tweet == undefined) return undefined;
-  const result = tweet.core?.userResults.result;
+  const result = getTweetUserResult(tweet);
   const user = result && userOrNullConverter(result);
   if (user == undefined) return undefined;
-  const quoted = tweet.quotedStatusResult;
-  const retweeted = tweet.legacy?.retweetedStatusResult;
+  const quoted = getQuotedStatusResult(tweet);
+  const retweeted = getRetweetedStatusResult(tweet);
 
   const reply =
     args.reply
-      ?.map((e) => buildTweetApiUtils({ result: e.tweetResults, promotedMetadata: e.promotedMetadata }))
+      ?.map((e) => buildTweetApiUtils({ result: getTimelineTweetResult(e), promotedMetadata: getTimelinePromotedMetadata(e) }))
       .filter((e): e is NonNullable<typeof e> => e != undefined) ?? [];
 
   return {
@@ -135,7 +200,8 @@ export const buildTweetApiUtils = (args: buildTweetApiUtilsArgs): TweetApiUtilsD
   };
 };
 
-export const tweetResultsConverter = (tweetResults: i.ItemResult): i.Tweet | undefined => {
+export const tweetResultsConverter = (tweetResults: i.ItemResult | any): i.Tweet | undefined => {
+  if (tweetResults == undefined) return undefined;
   if (tweetResults.result == undefined) return undefined;
   switch (tweetResults.result.typename) {
     case i.TypeName.Tweet:

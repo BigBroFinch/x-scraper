@@ -65,9 +65,15 @@ export function TimelineAddEntryFromJSONTyped(json: any, ignoreDiscriminator: bo
     if (json == null) {
         return json;
     }
+    let content: ContentUnion;
+    try {
+        content = ContentUnionFromJSON(json['content']);
+    } catch {
+        content = json['content'];
+    }
     return {
         
-        'content': ContentUnionFromJSON(json['content']),
+        'content': content,
         'entryId': json['entryId'],
         'sortIndex': json['sortIndex'],
     };
@@ -89,4 +95,3 @@ export function TimelineAddEntryToJSONTyped(value?: TimelineAddEntry | null, ign
         'sortIndex': value['sortIndex'],
     };
 }
-

@@ -100,13 +100,19 @@ export function TimelineTimelineItemFromJSONTyped(json: any, ignoreDiscriminator
     if (json == null) {
         return json;
     }
+    let itemContent: ItemContentUnion;
+    try {
+        itemContent = ItemContentUnionFromJSON(json['itemContent']);
+    } catch {
+        itemContent = json['itemContent'];
+    }
     return {
         
         'typename': TypeNameFromJSON(json['__typename']),
         'clientEventInfo': json['clientEventInfo'] == null ? undefined : ClientEventInfoFromJSON(json['clientEventInfo']),
         'entryType': ContentEntryTypeFromJSON(json['entryType']),
         'feedbackInfo': json['feedbackInfo'] == null ? undefined : json['feedbackInfo'],
-        'itemContent': ItemContentUnionFromJSON(json['itemContent']),
+        'itemContent': itemContent,
     };
 }
 
@@ -128,4 +134,3 @@ export function TimelineTimelineItemToJSONTyped(value?: TimelineTimelineItem | n
         'itemContent': ItemContentUnionToJSON(value['itemContent']),
     };
 }
-
