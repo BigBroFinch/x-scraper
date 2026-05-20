@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 /**
  * 
  * @export
@@ -67,7 +67,7 @@ export function UrlFromJSONTyped(json: any, ignoreDiscriminator: boolean): Url {
         
         'displayUrl': json['display_url'],
         'expandedUrl': json['expanded_url'] == null ? undefined : json['expanded_url'],
-        'indices': json['indices'],
+        'indices': safeArray(json['indices']),
         'url': json['url'],
     };
 }
@@ -85,7 +85,7 @@ export function UrlToJSONTyped(value?: Url | null, ignoreDiscriminator: boolean 
         
         'display_url': value['displayUrl'],
         'expanded_url': value['expandedUrl'],
-        'indices': value['indices'],
+        'indices': safeArray(value['indices']),
         'url': value['url'],
     };
 }

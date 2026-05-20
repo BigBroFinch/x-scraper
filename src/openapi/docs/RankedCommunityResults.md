@@ -11,7 +11,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { RankedCommunityResults } from 'x-scraper'
+import type { RankedCommunityResults } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

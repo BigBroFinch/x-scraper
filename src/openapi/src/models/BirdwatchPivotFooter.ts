@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { BirdwatchEntity } from './BirdwatchEntity';
 import {
     BirdwatchEntityFromJSON,
@@ -60,7 +60,7 @@ export function BirdwatchPivotFooterFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
-        'entities': ((json['entities'] as Array<any>).map(BirdwatchEntityFromJSON)),
+        'entities': safeArrayMap(json['entities'], BirdwatchEntityFromJSON),
         'text': json['text'],
     };
 }
@@ -76,7 +76,7 @@ export function BirdwatchPivotFooterToJSONTyped(value?: BirdwatchPivotFooter | n
 
     return {
         
-        'entities': ((value['entities'] as Array<any>).map(BirdwatchEntityToJSON)),
+        'entities': safeArrayMap(value['entities'], BirdwatchEntityToJSON),
         'text': value['text'],
     };
 }

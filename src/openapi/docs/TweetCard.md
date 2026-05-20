@@ -12,7 +12,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TweetCard } from 'x-scraper'
+import type { TweetCard } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TypeName } from './TypeName';
 import {
     TypeNameFromJSON,
@@ -67,8 +67,8 @@ export function NotificationTemplateFromJSONTyped(json: any, ignoreDiscriminator
     return {
         
         'typename': json['__typename'] == null ? undefined : TypeNameFromJSON(json['__typename']),
-        'fromUsers': json['from_users'] == null ? undefined : json['from_users'],
-        'targetObjects': json['target_objects'] == null ? undefined : json['target_objects'],
+        'fromUsers': safeOptionalArray(json['from_users']),
+        'targetObjects': safeOptionalArray(json['target_objects']),
     };
 }
 
@@ -84,8 +84,8 @@ export function NotificationTemplateToJSONTyped(value?: NotificationTemplate | n
     return {
         
         '__typename': TypeNameToJSON(value['typename']),
-        'from_users': value['fromUsers'],
-        'target_objects': value['targetObjects'],
+        'from_users': safeOptionalArray(value['fromUsers']),
+        'target_objects': safeOptionalArray(value['targetObjects']),
     };
 }
 

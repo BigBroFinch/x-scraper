@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { AudioSpaceParticipant } from './AudioSpaceParticipant';
 import {
     AudioSpaceParticipantFromJSON,
@@ -72,9 +72,9 @@ export function AudioSpaceParticipantsFromJSONTyped(json: any, ignoreDiscriminat
     return {
         
         'total': json['total'],
-        'admins': json['admins'] == null ? undefined : ((json['admins'] as Array<any>).map(AudioSpaceParticipantFromJSON)),
-        'speakers': json['speakers'] == null ? undefined : ((json['speakers'] as Array<any>).map(AudioSpaceParticipantFromJSON)),
-        'listeners': json['listeners'] == null ? undefined : ((json['listeners'] as Array<any>).map(AudioSpaceParticipantFromJSON)),
+        'admins': safeOptionalArrayMap(json['admins'], AudioSpaceParticipantFromJSON),
+        'speakers': safeOptionalArrayMap(json['speakers'], AudioSpaceParticipantFromJSON),
+        'listeners': safeOptionalArrayMap(json['listeners'], AudioSpaceParticipantFromJSON),
     };
 }
 
@@ -90,9 +90,9 @@ export function AudioSpaceParticipantsToJSONTyped(value?: AudioSpaceParticipants
     return {
         
         'total': value['total'],
-        'admins': value['admins'] == null ? undefined : ((value['admins'] as Array<any>).map(AudioSpaceParticipantToJSON)),
-        'speakers': value['speakers'] == null ? undefined : ((value['speakers'] as Array<any>).map(AudioSpaceParticipantToJSON)),
-        'listeners': value['listeners'] == null ? undefined : ((value['listeners'] as Array<any>).map(AudioSpaceParticipantToJSON)),
+        'admins': safeOptionalArrayMap(value['admins'], AudioSpaceParticipantToJSON),
+        'speakers': safeOptionalArrayMap(value['speakers'], AudioSpaceParticipantToJSON),
+        'listeners': safeOptionalArrayMap(value['listeners'], AudioSpaceParticipantToJSON),
     };
 }
 

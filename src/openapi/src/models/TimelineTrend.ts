@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TypeName } from './TypeName';
 import {
     TypeNameFromJSON,
@@ -149,7 +149,7 @@ export function TimelineTrendFromJSONTyped(json: any, ignoreDiscriminator: boole
     return {
         
         'typename': TypeNameFromJSON(json['__typename']),
-        'images': json['images'] == null ? undefined : ((json['images'] as Array<any>).map(TrendImageFromJSON)),
+        'images': safeOptionalArrayMap(json['images'], TrendImageFromJSON),
         'isAiTrend': json['is_ai_trend'] == null ? undefined : json['is_ai_trend'],
         'itemType': json['itemType'] == null ? undefined : ContentItemTypeFromJSON(json['itemType']),
         'name': json['name'],
@@ -172,7 +172,7 @@ export function TimelineTrendToJSONTyped(value?: TimelineTrend | null, ignoreDis
     return {
         
         '__typename': TypeNameToJSON(value['typename']),
-        'images': value['images'] == null ? undefined : ((value['images'] as Array<any>).map(TrendImageToJSON)),
+        'images': safeOptionalArrayMap(value['images'], TrendImageToJSON),
         'is_ai_trend': value['isAiTrend'],
         'itemType': ContentItemTypeToJSON(value['itemType']),
         'name': value['name'],

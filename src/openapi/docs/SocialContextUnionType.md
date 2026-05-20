@@ -10,7 +10,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { SocialContextUnionType } from 'x-scraper'
+import type { SocialContextUnionType } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

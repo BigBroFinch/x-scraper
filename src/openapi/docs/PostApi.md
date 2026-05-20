@@ -29,11 +29,11 @@ create Bookmark
 import {
   Configuration,
   PostApi,
-} from 'x-scraper';
-import type { PostCreateBookmarkOperationRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { PostCreateBookmarkOperationRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -147,11 +147,11 @@ create Retweet
 import {
   Configuration,
   PostApi,
-} from 'x-scraper';
-import type { PostCreateRetweetOperationRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { PostCreateRetweetOperationRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -265,11 +265,11 @@ create Tweet
 import {
   Configuration,
   PostApi,
-} from 'x-scraper';
-import type { PostCreateTweetOperationRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { PostCreateTweetOperationRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -383,11 +383,11 @@ delete Bookmark
 import {
   Configuration,
   PostApi,
-} from 'x-scraper';
-import type { PostDeleteBookmarkOperationRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { PostDeleteBookmarkOperationRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -501,11 +501,11 @@ delete Retweet
 import {
   Configuration,
   PostApi,
-} from 'x-scraper';
-import type { PostDeleteRetweetOperationRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { PostDeleteRetweetOperationRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -619,11 +619,11 @@ delete Retweet
 import {
   Configuration,
   PostApi,
-} from 'x-scraper';
-import type { PostDeleteTweetOperationRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { PostDeleteTweetOperationRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -737,11 +737,11 @@ favorite Tweet
 import {
   Configuration,
   PostApi,
-} from 'x-scraper';
-import type { PostFavoriteTweetOperationRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { PostFavoriteTweetOperationRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -855,11 +855,11 @@ unfavorite Tweet
 import {
   Configuration,
   PostApi,
-} from 'x-scraper';
-import type { PostUnfavoriteTweetOperationRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { PostUnfavoriteTweetOperationRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",

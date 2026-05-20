@@ -14,7 +14,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { BirdwatchEntityRef } from 'x-scraper'
+import type { BirdwatchEntityRef } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

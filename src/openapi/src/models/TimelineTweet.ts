@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TypeName } from './TypeName';
 import {
     TypeNameFromJSON,
@@ -137,18 +137,6 @@ export function TimelineTweetFromJSONTyped(json: any, ignoreDiscriminator: boole
     if (json == null) {
         return json;
     }
-    let tweetResults: ItemResult;
-    try {
-        tweetResults = ItemResultFromJSON(json['tweet_results']);
-    } catch {
-        tweetResults = json['tweet_results'];
-    }
-    let socialContext: SocialContextUnion | undefined;
-    try {
-        socialContext = json['socialContext'] == null ? undefined : SocialContextUnionFromJSON(json['socialContext']);
-    } catch {
-        socialContext = json['socialContext'];
-    }
     return {
         
         'typename': TypeNameFromJSON(json['__typename']),
@@ -156,9 +144,9 @@ export function TimelineTweetFromJSONTyped(json: any, ignoreDiscriminator: boole
         'highlights': json['highlights'] == null ? undefined : HighlightFromJSON(json['highlights']),
         'itemType': ContentItemTypeFromJSON(json['itemType']),
         'promotedMetadata': json['promotedMetadata'] == null ? undefined : json['promotedMetadata'],
-        'socialContext': socialContext,
+        'socialContext': json['socialContext'] == null ? undefined : SocialContextUnionFromJSON(json['socialContext']),
         'tweetDisplayType': json['tweetDisplayType'],
-        'tweetResults': tweetResults,
+        'tweetResults': ItemResultFromJSON(json['tweet_results']),
     };
 }
 

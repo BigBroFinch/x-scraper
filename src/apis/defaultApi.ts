@@ -1,5 +1,11 @@
 import type { DefaultFlag, RequestParam, TweetApiUtilsData, TwitterApiUtilsResponse } from '@/models';
-import { buildHeader, buildTweetApiUtils, errorCheck, getKwargs, InitOverridesType } from '@/utils';
+import {
+  buildTweetApiUtils,
+  errorCheck,
+  executeGraphQLRequest,
+  GraphQLOperationRegistry,
+  InitOverridesType,
+} from '@/utils';
 import type * as i from '@/openapi';
 
 export type ProfileSpotlightsQueryParam = {
@@ -16,23 +22,24 @@ export class DefaultApiUtils {
   api: i.DefaultApi;
   flag: DefaultFlag;
   initOverrides: InitOverridesType;
+  operations: GraphQLOperationRegistry;
 
   constructor(api: i.DefaultApi, flag: DefaultFlag, initOverrides: InitOverridesType) {
     this.api = api;
     this.flag = flag;
     this.initOverrides = initOverrides;
+    this.operations = new GraphQLOperationRegistry(flag, initOverrides);
   }
 
   async request<T1, T2>(param: RequestParam<T1, T2>): Promise<TwitterApiUtilsResponse<T1>> {
     const apiFn: typeof param.apiFn = param.apiFn.bind(this.api);
-    const args = getKwargs(this.flag[param.key], param.param);
-    const response = await apiFn(args, this.initOverrides(this.flag[param.key]));
-    const data = param.convertFn(await response.value());
-    return {
-      raw: { response: response.raw },
-      header: buildHeader(response.raw.headers),
-      data: data,
-    };
+    return executeGraphQLRequest({
+      apiFn,
+      operations: this.operations,
+      key: param.key,
+      param: param.param,
+      convertFn: param.convertFn,
+    });
   }
 
   async getProfileSpotlightsQuery(

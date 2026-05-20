@@ -36,11 +36,11 @@ get bookmarks
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetBookmarksRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetBookmarksRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -157,11 +157,11 @@ get about of community
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetCommunityAboutTimelineRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetCommunityAboutTimelineRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -278,11 +278,11 @@ get media list of community
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetCommunityMediaTimelineRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetCommunityMediaTimelineRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -399,11 +399,11 @@ get tweet list of community. rankingMode:[Recency, Relevance]
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetCommunityTweetsTimelineRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetCommunityTweetsTimelineRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -520,11 +520,11 @@ get tweet list of timeline
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetHomeLatestTimelineRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetHomeLatestTimelineRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -641,11 +641,11 @@ get tweet list of timeline
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetHomeTimelineRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetHomeTimelineRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -762,11 +762,11 @@ get user likes tweets
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetLikesRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetLikesRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -886,11 +886,11 @@ get tweet list of timeline
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetListLatestTweetsTimelineRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetListLatestTweetsTimelineRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -1007,11 +1007,11 @@ get notification list. timeline_type:[All, Verified, Mentions]
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetNotificationsTimelineRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetNotificationsTimelineRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -1128,11 +1128,11 @@ search tweet list. product:[Top, Latest, People, Photos, Videos]
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetSearchTimelineRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetSearchTimelineRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -1249,11 +1249,11 @@ get TweetDetail
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetTweetDetailRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetTweetDetailRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -1373,11 +1373,11 @@ get user highlights tweets
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetUserHighlightsTweetsRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetUserHighlightsTweetsRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -1497,11 +1497,11 @@ get user media tweets
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetUserMediaRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetUserMediaRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -1621,11 +1621,11 @@ get user tweets
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetUserTweetsRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetUserTweetsRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -1745,11 +1745,11 @@ get user replies tweets
 import {
   Configuration,
   TweetApi,
-} from 'x-scraper';
-import type { GetUserTweetsAndRepliesRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetUserTweetsAndRepliesRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",

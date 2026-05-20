@@ -11,7 +11,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { HomeTimelineResponseData } from 'x-scraper'
+import type { HomeTimelineResponseData } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

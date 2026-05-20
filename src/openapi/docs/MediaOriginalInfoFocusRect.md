@@ -14,7 +14,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { MediaOriginalInfoFocusRect } from 'x-scraper'
+import type { MediaOriginalInfoFocusRect } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

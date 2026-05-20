@@ -19,7 +19,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TimelineShowAlert } from 'x-scraper'
+import type { TimelineShowAlert } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

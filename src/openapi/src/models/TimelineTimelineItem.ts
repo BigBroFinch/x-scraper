@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TypeName } from './TypeName';
 import {
     TypeNameFromJSON,
@@ -100,19 +100,13 @@ export function TimelineTimelineItemFromJSONTyped(json: any, ignoreDiscriminator
     if (json == null) {
         return json;
     }
-    let itemContent: ItemContentUnion;
-    try {
-        itemContent = ItemContentUnionFromJSON(json['itemContent']);
-    } catch {
-        itemContent = json['itemContent'];
-    }
     return {
         
         'typename': TypeNameFromJSON(json['__typename']),
         'clientEventInfo': json['clientEventInfo'] == null ? undefined : ClientEventInfoFromJSON(json['clientEventInfo']),
         'entryType': ContentEntryTypeFromJSON(json['entryType']),
         'feedbackInfo': json['feedbackInfo'] == null ? undefined : json['feedbackInfo'],
-        'itemContent': itemContent,
+        'itemContent': ItemContentUnionFromJSON(json['itemContent']),
     };
 }
 

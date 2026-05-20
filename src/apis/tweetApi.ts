@@ -6,10 +6,10 @@ import {
   TwitterApiUtilsResponse,
 } from '@/models';
 import {
-  buildHeader,
   entriesCursor,
   errorCheck,
-  getKwargs,
+  executeGraphQLRequest,
+  GraphQLOperationRegistry,
   InitOverridesType,
   instructionConverter,
   instructionToEntry,
@@ -104,29 +104,33 @@ export class TweetApiUtils {
   api: i.TweetApi;
   flag: DefaultFlag;
   initOverrides: InitOverridesType;
+  operations: GraphQLOperationRegistry;
 
   constructor(api: i.TweetApi, flag: DefaultFlag, initOverrides: InitOverridesType) {
     this.api = api;
     this.flag = flag;
     this.initOverrides = initOverrides;
+    this.operations = new GraphQLOperationRegistry(flag, initOverrides);
   }
 
   async request<T>(param: RequestParam<i.InstructionUnion[], T>): Promise<ResponseType> {
     const apiFn: typeof param.apiFn = param.apiFn.bind(this.api);
-    const args = getKwargs(this.flag[param.key], param.param);
-    const response = await apiFn(args, this.initOverrides(this.flag[param.key]));
-    const instruction = param.convertFn(await response.value());
-    const entry = instructionToEntry(instruction);
-    const data = [...tweetEntriesConverter(entry), ...instructionConverter(instruction)];
-    return {
-      raw: { response: response.raw },
-      header: buildHeader(response.raw.headers),
-      data: {
-        raw: { instruction, entry },
-        cursor: entriesCursor(entry),
-        data: data,
+    return executeGraphQLRequest({
+      apiFn,
+      operations: this.operations,
+      key: param.key,
+      param: param.param,
+      convertFn: (value) => {
+        const instruction = param.convertFn(value);
+        const entry = instructionToEntry(instruction);
+        const data = [...tweetEntriesConverter(entry), ...instructionConverter(instruction)];
+        return {
+          raw: { instruction, entry },
+          cursor: entriesCursor(entry),
+          data: data,
+        };
       },
-    };
+    });
   }
 
   async getTweetDetail(param: GetTweetDetailParam): Promise<ResponseType> {

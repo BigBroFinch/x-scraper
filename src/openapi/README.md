@@ -1,4 +1,4 @@
-# x-scraper@0.0.1
+# @finch_ren/x-scraper@0.0.1
 
 A TypeScript SDK client for the x.com API.
 
@@ -21,7 +21,7 @@ import {
 import type { GetProfileSpotlightsQueryRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",

@@ -24,7 +24,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { Session } from 'x-scraper'
+import type { Session } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

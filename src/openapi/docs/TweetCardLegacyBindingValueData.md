@@ -17,7 +17,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TweetCardLegacyBindingValueData } from 'x-scraper'
+import type { TweetCardLegacyBindingValueData } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

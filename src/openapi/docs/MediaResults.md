@@ -11,7 +11,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { MediaResults } from 'x-scraper'
+import type { MediaResults } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

@@ -24,11 +24,11 @@ get Audio Space by ID
 import {
   Configuration,
   OtherApi,
-} from 'x-scraper';
-import type { GetAudioSpaceByIdRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetAudioSpaceByIdRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -145,11 +145,11 @@ get Broadcast by ID
 import {
   Configuration,
   OtherApi,
-} from 'x-scraper';
-import type { GetBroadcastQueryRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetBroadcastQueryRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -266,11 +266,11 @@ This is not an actual endpoint
 import {
   Configuration,
   OtherApi,
-} from 'x-scraper';
-import type { OtherRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { OtherRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",

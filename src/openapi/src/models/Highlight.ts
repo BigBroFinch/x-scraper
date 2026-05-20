@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TextHighlight } from './TextHighlight';
 import {
     TextHighlightFromJSON,
@@ -53,7 +53,7 @@ export function HighlightFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     }
     return {
         
-        'textHighlights': ((json['textHighlights'] as Array<any>).map(TextHighlightFromJSON)),
+        'textHighlights': safeArrayMap(json['textHighlights'], TextHighlightFromJSON),
     };
 }
 
@@ -68,7 +68,7 @@ export function HighlightToJSONTyped(value?: Highlight | null, ignoreDiscriminat
 
     return {
         
-        'textHighlights': ((value['textHighlights'] as Array<any>).map(TextHighlightToJSON)),
+        'textHighlights': safeArrayMap(value['textHighlights'], TextHighlightToJSON),
     };
 }
 

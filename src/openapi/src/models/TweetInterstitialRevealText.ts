@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TweetInterstitialTextEntity } from './TweetInterstitialTextEntity';
 import {
     TweetInterstitialTextEntityFromJSON,
@@ -67,7 +67,7 @@ export function TweetInterstitialRevealTextFromJSONTyped(json: any, ignoreDiscri
     }
     return {
         
-        'entities': ((json['entities'] as Array<any>).map(TweetInterstitialTextEntityFromJSON)),
+        'entities': safeArrayMap(json['entities'], TweetInterstitialTextEntityFromJSON),
         'rtl': json['rtl'],
         'text': json['text'],
     };
@@ -84,7 +84,7 @@ export function TweetInterstitialRevealTextToJSONTyped(value?: TweetInterstitial
 
     return {
         
-        'entities': ((value['entities'] as Array<any>).map(TweetInterstitialTextEntityToJSON)),
+        'entities': safeArrayMap(value['entities'], TweetInterstitialTextEntityToJSON),
         'rtl': value['rtl'],
         'text': value['text'],
     };

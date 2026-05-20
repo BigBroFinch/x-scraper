@@ -23,11 +23,11 @@ get user by screen name
 import {
   Configuration,
   DefaultApi,
-} from 'x-scraper';
-import type { GetProfileSpotlightsQueryRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetProfileSpotlightsQueryRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -144,11 +144,11 @@ get TweetResultByRestId
 import {
   Configuration,
   DefaultApi,
-} from 'x-scraper';
-import type { GetTweetResultByRestIdRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetTweetResultByRestIdRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",

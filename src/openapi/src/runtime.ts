@@ -350,6 +350,22 @@ export function mapValues(data: any, fn: (item: any) => any) {
     return result;
 }
 
+export function safeArray<T = unknown>(data: unknown): T[] {
+    return Array.isArray(data) ? (data as T[]) : [];
+}
+
+export function safeOptionalArray<T = unknown>(data: unknown): T[] | undefined {
+    return data == null ? undefined : safeArray<T>(data);
+}
+
+export function safeArrayMap<T>(data: unknown, fn: (item: any) => T): T[] {
+    return safeArray(data).map(fn);
+}
+
+export function safeOptionalArrayMap<T>(data: unknown, fn: (item: any) => T): T[] | undefined {
+    return data == null ? undefined : safeArrayMap(data, fn);
+}
+
 export function canConsumeForm(consumes: Consume[]): boolean {
     for (const consume of consumes) {
         if ('multipart/form-data' === consume.contentType) {

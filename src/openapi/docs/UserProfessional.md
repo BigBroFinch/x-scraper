@@ -13,7 +13,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { UserProfessional } from 'x-scraper'
+import type { UserProfessional } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

@@ -31,7 +31,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { MediaExtended } from 'x-scraper'
+import type { MediaExtended } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

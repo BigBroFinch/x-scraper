@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 /**
  * 
  * @export
@@ -59,7 +59,7 @@ export function TimestampFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     }
     return {
         
-        'indices': json['indices'],
+        'indices': safeArray(json['indices']),
         'seconds': json['seconds'],
         'text': json['text'],
     };
@@ -76,7 +76,7 @@ export function TimestampToJSONTyped(value?: Timestamp | null, ignoreDiscriminat
 
     return {
         
-        'indices': value['indices'],
+        'indices': safeArray(value['indices']),
         'seconds': value['seconds'],
         'text': value['text'],
     };

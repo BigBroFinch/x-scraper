@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TombstoneEntity } from './TombstoneEntity';
 import {
     TombstoneEntityFromJSON,
@@ -64,7 +64,7 @@ export function TombstoneRichTextFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'entities': json['entities'] == null ? undefined : ((json['entities'] as Array<any>).map(TombstoneEntityFromJSON)),
+        'entities': safeOptionalArrayMap(json['entities'], TombstoneEntityFromJSON),
         'rtl': json['rtl'] == null ? undefined : json['rtl'],
         'text': json['text'] == null ? undefined : json['text'],
     };
@@ -81,7 +81,7 @@ export function TombstoneRichTextToJSONTyped(value?: TombstoneRichText | null, i
 
     return {
         
-        'entities': value['entities'] == null ? undefined : ((value['entities'] as Array<any>).map(TombstoneEntityToJSON)),
+        'entities': safeOptionalArrayMap(value['entities'], TombstoneEntityToJSON),
         'rtl': value['rtl'],
         'text': value['text'],
     };

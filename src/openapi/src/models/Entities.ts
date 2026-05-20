@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { Media } from './Media';
 import {
     MediaFromJSON,
@@ -100,12 +100,12 @@ export function EntitiesFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     }
     return {
         
-        'hashtags': json['hashtags'] == null ? [] : json['hashtags'],
-        'media': json['media'] == null ? undefined : ((json['media'] as Array<any>).map(MediaFromJSON)),
-        'symbols': json['symbols'] == null ? [] : json['symbols'],
-        'timestamps': json['timestamps'] == null ? undefined : ((json['timestamps'] as Array<any>).map(TimestampFromJSON)),
-        'urls': json['urls'] == null ? [] : ((json['urls'] as Array<any>).map(UrlFromJSON)),
-        'userMentions': json['user_mentions'] == null ? [] : json['user_mentions'],
+        'hashtags': safeArray(json['hashtags']),
+        'media': safeOptionalArrayMap(json['media'], MediaFromJSON),
+        'symbols': safeArray(json['symbols']),
+        'timestamps': safeOptionalArrayMap(json['timestamps'], TimestampFromJSON),
+        'urls': safeArrayMap(json['urls'], UrlFromJSON),
+        'userMentions': safeArray(json['user_mentions']),
     };
 }
 
@@ -120,12 +120,12 @@ export function EntitiesToJSONTyped(value?: Entities | null, ignoreDiscriminator
 
     return {
         
-        'hashtags': value['hashtags'] == null ? [] : value['hashtags'],
-        'media': value['media'] == null ? undefined : ((value['media'] as Array<any>).map(MediaToJSON)),
-        'symbols': value['symbols'] == null ? [] : value['symbols'],
-        'timestamps': value['timestamps'] == null ? undefined : ((value['timestamps'] as Array<any>).map(TimestampToJSON)),
-        'urls': value['urls'] == null ? [] : ((value['urls'] as Array<any>).map(UrlToJSON)),
-        'user_mentions': value['userMentions'] == null ? [] : value['userMentions'],
+        'hashtags': safeArray(value['hashtags']),
+        'media': safeOptionalArrayMap(value['media'], MediaToJSON),
+        'symbols': safeArray(value['symbols']),
+        'timestamps': safeOptionalArrayMap(value['timestamps'], TimestampToJSON),
+        'urls': safeArrayMap(value['urls'], UrlToJSON),
+        'user_mentions': safeArray(value['userMentions']),
     };
 }
 

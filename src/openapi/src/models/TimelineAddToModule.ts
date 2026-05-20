@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { ModuleItem } from './ModuleItem';
 import {
     ModuleItemFromJSON,
@@ -83,7 +83,7 @@ export function TimelineAddToModuleFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'moduleEntryId': json['moduleEntryId'],
-        'moduleItems': ((json['moduleItems'] as Array<any>).map(ModuleItemFromJSON)),
+        'moduleItems': safeArrayMap(json['moduleItems'], ModuleItemFromJSON),
         'prepend': json['prepend'] == null ? undefined : json['prepend'],
         'type': InstructionTypeFromJSON(json['type']),
     };
@@ -101,7 +101,7 @@ export function TimelineAddToModuleToJSONTyped(value?: TimelineAddToModule | nul
     return {
         
         'moduleEntryId': value['moduleEntryId'],
-        'moduleItems': ((value['moduleItems'] as Array<any>).map(ModuleItemToJSON)),
+        'moduleItems': safeArrayMap(value['moduleItems'], ModuleItemToJSON),
         'prepend': value['prepend'],
         'type': InstructionTypeToJSON(value['type']),
     };

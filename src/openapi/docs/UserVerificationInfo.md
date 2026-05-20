@@ -12,7 +12,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { UserVerificationInfo } from 'x-scraper'
+import type { UserVerificationInfo } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

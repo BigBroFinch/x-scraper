@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { UserResults } from './UserResults';
 import {
     UserResultsFromJSON,
@@ -52,7 +52,7 @@ export function UsersResponseDataFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'users': json['users'] == null ? undefined : ((json['users'] as Array<any>).map(UserResultsFromJSON)),
+        'users': safeOptionalArrayMap(json['users'], UserResultsFromJSON),
     };
 }
 
@@ -67,7 +67,7 @@ export function UsersResponseDataToJSONTyped(value?: UsersResponseData | null, i
 
     return {
         
-        'users': value['users'] == null ? undefined : ((value['users'] as Array<any>).map(UserResultsToJSON)),
+        'users': safeOptionalArrayMap(value['users'], UserResultsToJSON),
     };
 }
 

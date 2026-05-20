@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { NotificationsTimelineData } from './NotificationsTimelineData';
 import {
     NotificationsTimelineDataFromJSON,
@@ -67,7 +67,7 @@ export function NotificationsTimelineResponseFromJSONTyped(json: any, ignoreDisc
     return {
         
         'data': NotificationsTimelineDataFromJSON(json['data']),
-        'errors': json['errors'] == null ? undefined : ((json['errors'] as Array<any>).map(ErrorResponseFromJSON)),
+        'errors': safeOptionalArrayMap(json['errors'], ErrorResponseFromJSON),
     };
 }
 
@@ -83,7 +83,7 @@ export function NotificationsTimelineResponseToJSONTyped(value?: NotificationsTi
     return {
         
         'data': NotificationsTimelineDataToJSON(value['data']),
-        'errors': value['errors'] == null ? undefined : ((value['errors'] as Array<any>).map(ErrorResponseToJSON)),
+        'errors': safeOptionalArrayMap(value['errors'], ErrorResponseToJSON),
     };
 }
 

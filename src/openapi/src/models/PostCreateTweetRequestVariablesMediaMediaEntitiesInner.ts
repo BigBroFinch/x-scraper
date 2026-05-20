@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 /**
  * 
  * @export
@@ -53,7 +53,7 @@ export function PostCreateTweetRequestVariablesMediaMediaEntitiesInnerFromJSONTy
     return {
         
         'mediaId': json['media_id'],
-        'taggedUsers': json['tagged_users'],
+        'taggedUsers': safeArray(json['tagged_users']),
     };
 }
 
@@ -69,7 +69,7 @@ export function PostCreateTweetRequestVariablesMediaMediaEntitiesInnerToJSONType
     return {
         
         'media_id': value['mediaId'],
-        'tagged_users': value['taggedUsers'],
+        'tagged_users': safeArray(value['taggedUsers']),
     };
 }
 

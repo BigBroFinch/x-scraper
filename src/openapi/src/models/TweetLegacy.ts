@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { ExtendedEntities } from './ExtendedEntities';
 import {
     ExtendedEntitiesFromJSON,
@@ -305,7 +305,7 @@ export function TweetLegacyFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'conversationControl': json['conversation_control'] == null ? undefined : json['conversation_control'],
         'conversationIdStr': json['conversation_id_str'],
         'createdAt': json['created_at'],
-        'displayTextRange': json['display_text_range'],
+        'displayTextRange': safeArray(json['display_text_range']),
         'entities': EntitiesFromJSON(json['entities']),
         'extendedEntities': json['extended_entities'] == null ? undefined : ExtendedEntitiesFromJSON(json['extended_entities']),
         'favoriteCount': json['favorite_count'],
@@ -350,7 +350,7 @@ export function TweetLegacyToJSONTyped(value?: TweetLegacy | null, ignoreDiscrim
         'conversation_control': value['conversationControl'],
         'conversation_id_str': value['conversationIdStr'],
         'created_at': value['createdAt'],
-        'display_text_range': value['displayTextRange'],
+        'display_text_range': safeArray(value['displayTextRange']),
         'entities': EntitiesToJSON(value['entities']),
         'extended_entities': ExtendedEntitiesToJSON(value['extendedEntities']),
         'favorite_count': value['favoriteCount'],

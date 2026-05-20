@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { UserTweetsData } from './UserTweetsData';
 import {
     UserTweetsDataFromJSON,
@@ -67,7 +67,7 @@ export function UserTweetsResponseFromJSONTyped(json: any, ignoreDiscriminator: 
     return {
         
         'data': UserTweetsDataFromJSON(json['data']),
-        'errors': json['errors'] == null ? undefined : ((json['errors'] as Array<any>).map(ErrorResponseFromJSON)),
+        'errors': safeOptionalArrayMap(json['errors'], ErrorResponseFromJSON),
     };
 }
 
@@ -83,7 +83,7 @@ export function UserTweetsResponseToJSONTyped(value?: UserTweetsResponse | null,
     return {
         
         'data': UserTweetsDataToJSON(value['data']),
-        'errors': value['errors'] == null ? undefined : ((value['errors'] as Array<any>).map(ErrorResponseToJSON)),
+        'errors': safeOptionalArrayMap(value['errors'], ErrorResponseToJSON),
     };
 }
 

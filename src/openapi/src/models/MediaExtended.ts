@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { AdditionalMediaInfo } from './AdditionalMediaInfo';
 import {
     AdditionalMediaInfoFromJSON,
@@ -258,7 +258,7 @@ export function MediaExtendedFromJSONTyped(json: any, ignoreDiscriminator: boole
         'extMediaAvailability': json['ext_media_availability'] == null ? undefined : ExtMediaAvailabilityFromJSON(json['ext_media_availability']),
         'features': json['features'] == null ? undefined : json['features'],
         'idStr': json['id_str'],
-        'indices': json['indices'],
+        'indices': safeArray(json['indices']),
         'mediaStats': json['mediaStats'] == null ? undefined : MediaStatsFromJSON(json['mediaStats']),
         'mediaKey': json['media_key'],
         'mediaResults': json['media_results'] == null ? undefined : MediaResultsFromJSON(json['media_results']),
@@ -293,7 +293,7 @@ export function MediaExtendedToJSONTyped(value?: MediaExtended | null, ignoreDis
         'ext_media_availability': ExtMediaAvailabilityToJSON(value['extMediaAvailability']),
         'features': value['features'],
         'id_str': value['idStr'],
-        'indices': value['indices'],
+        'indices': safeArray(value['indices']),
         'mediaStats': MediaStatsToJSON(value['mediaStats']),
         'media_key': value['mediaKey'],
         'media_results': MediaResultsToJSON(value['mediaResults']),

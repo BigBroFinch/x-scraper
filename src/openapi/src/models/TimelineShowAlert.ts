@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TimelineShowAlertRichText } from './TimelineShowAlertRichText';
 import {
     TimelineShowAlertRichTextFromJSON,
@@ -143,7 +143,7 @@ export function TimelineShowAlertFromJSONTyped(json: any, ignoreDiscriminator: b
         'richText': TimelineShowAlertRichTextFromJSON(json['richText']),
         'triggerDelayMs': json['triggerDelayMs'] == null ? undefined : json['triggerDelayMs'],
         'type': InstructionTypeFromJSON(json['type']),
-        'usersResults': ((json['usersResults'] as Array<any>).map(UserResultsFromJSON)),
+        'usersResults': safeArrayMap(json['usersResults'], UserResultsFromJSON),
     };
 }
 
@@ -166,7 +166,7 @@ export function TimelineShowAlertToJSONTyped(value?: TimelineShowAlert | null, i
         'richText': TimelineShowAlertRichTextToJSON(value['richText']),
         'triggerDelayMs': value['triggerDelayMs'],
         'type': InstructionTypeToJSON(value['type']),
-        'usersResults': ((value['usersResults'] as Array<any>).map(UserResultsToJSON)),
+        'usersResults': safeArrayMap(value['usersResults'], UserResultsToJSON),
     };
 }
 

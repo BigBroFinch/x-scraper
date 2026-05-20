@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { ModuleItem } from './ModuleItem';
 import {
     ModuleItemFromJSON,
@@ -138,12 +138,6 @@ export function TimelineTimelineModuleFromJSONTyped(json: any, ignoreDiscriminat
     if (json == null) {
         return json;
     }
-    let items: Array<ModuleItem> | undefined;
-    try {
-        items = json['items'] == null ? undefined : ((json['items'] as Array<any>).map(ModuleItemFromJSON));
-    } catch {
-        items = json['items'];
-    }
     return {
         
         'typename': TypeNameFromJSON(json['__typename']),
@@ -153,7 +147,7 @@ export function TimelineTimelineModuleFromJSONTyped(json: any, ignoreDiscriminat
         'feedbackInfo': json['feedbackInfo'] == null ? undefined : FeedbackInfoFromJSON(json['feedbackInfo']),
         'footer': json['footer'] == null ? undefined : json['footer'],
         'header': json['header'] == null ? undefined : json['header'],
-        'items': items,
+        'items': safeOptionalArrayMap(json['items'], ModuleItemFromJSON),
         'metadata': json['metadata'] == null ? undefined : json['metadata'],
     };
 }
@@ -176,7 +170,7 @@ export function TimelineTimelineModuleToJSONTyped(value?: TimelineTimelineModule
         'feedbackInfo': FeedbackInfoToJSON(value['feedbackInfo']),
         'footer': value['footer'],
         'header': value['header'],
-        'items': value['items'] == null ? undefined : ((value['items'] as Array<any>).map(ModuleItemToJSON)),
+        'items': safeOptionalArrayMap(value['items'], ModuleItemToJSON),
         'metadata': value['metadata'],
     };
 }

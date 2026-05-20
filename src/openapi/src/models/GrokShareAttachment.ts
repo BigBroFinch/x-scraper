@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { GrokShareAttachmentItem } from './GrokShareAttachmentItem';
 import {
     GrokShareAttachmentItemFromJSON,
@@ -53,7 +53,7 @@ export function GrokShareAttachmentFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'items': ((json['items'] as Array<any>).map(GrokShareAttachmentItemFromJSON)),
+        'items': safeArrayMap(json['items'], GrokShareAttachmentItemFromJSON),
     };
 }
 
@@ -68,7 +68,7 @@ export function GrokShareAttachmentToJSONTyped(value?: GrokShareAttachment | nul
 
     return {
         
-        'items': ((value['items'] as Array<any>).map(GrokShareAttachmentItemToJSON)),
+        'items': safeArrayMap(value['items'], GrokShareAttachmentItemToJSON),
     };
 }
 

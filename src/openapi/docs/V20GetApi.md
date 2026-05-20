@@ -22,11 +22,11 @@ get search adaptive
 import {
   Configuration,
   V20GetApi,
-} from 'x-scraper';
-import type { GetSearchAdaptiveRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetSearchAdaptiveRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",

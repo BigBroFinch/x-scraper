@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { InstructionType } from './InstructionType';
 import {
     InstructionTypeFromJSON,
@@ -69,7 +69,7 @@ export function TimelineAddEntriesFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'entries': ((json['entries'] as Array<any>).map(TimelineAddEntryFromJSON)),
+        'entries': safeArrayMap(json['entries'], TimelineAddEntryFromJSON),
         'type': InstructionTypeFromJSON(json['type']),
     };
 }
@@ -85,7 +85,7 @@ export function TimelineAddEntriesToJSONTyped(value?: TimelineAddEntries | null,
 
     return {
         
-        'entries': ((value['entries'] as Array<any>).map(TimelineAddEntryToJSON)),
+        'entries': safeArrayMap(value['entries'], TimelineAddEntryToJSON),
         'type': InstructionTypeToJSON(value['type']),
     };
 }

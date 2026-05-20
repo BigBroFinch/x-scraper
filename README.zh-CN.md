@@ -295,6 +295,10 @@ pnpm test
 pnpm generate
 ```
 
+OpenAPI 生成会使用本仓库的 `scripts/openapi-templates/typescript-fetch` 模板覆盖层。
+该模板会让生成模型在转换数组字段时兼容 X 返回的非数组异常结构。
+运行生成器需要本机 Java runtime，因为 `@openapitools/openapi-generator-cli` 会启动 OpenAPI Generator jar。
+
 ## openapi/placeholder.json 说明
 
 `openapi/placeholder.json` 是运行时使用的 GraphQL 操作模板表，不是普通示例文件。  

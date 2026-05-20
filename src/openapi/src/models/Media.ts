@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { AdditionalMediaInfo } from './AdditionalMediaInfo';
 import {
     AdditionalMediaInfoFromJSON,
@@ -246,7 +246,7 @@ export function MediaFromJSONTyped(json: any, ignoreDiscriminator: boolean): Med
         'extMediaAvailability': ExtMediaAvailabilityFromJSON(json['ext_media_availability']),
         'features': json['features'] == null ? undefined : json['features'],
         'idStr': json['id_str'],
-        'indices': json['indices'],
+        'indices': safeArray(json['indices']),
         'mediaKey': json['media_key'],
         'mediaResults': json['media_results'] == null ? undefined : MediaResultsFromJSON(json['media_results']),
         'mediaUrlHttps': json['media_url_https'],
@@ -280,7 +280,7 @@ export function MediaToJSONTyped(value?: Media | null, ignoreDiscriminator: bool
         'ext_media_availability': ExtMediaAvailabilityToJSON(value['extMediaAvailability']),
         'features': value['features'],
         'id_str': value['idStr'],
-        'indices': value['indices'],
+        'indices': safeArray(value['indices']),
         'media_key': value['mediaKey'],
         'media_results': MediaResultsToJSON(value['mediaResults']),
         'media_url_https': value['mediaUrlHttps'],

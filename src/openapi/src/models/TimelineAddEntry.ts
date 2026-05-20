@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { ContentUnion } from './ContentUnion';
 import {
     ContentUnionFromJSON,
@@ -65,15 +65,9 @@ export function TimelineAddEntryFromJSONTyped(json: any, ignoreDiscriminator: bo
     if (json == null) {
         return json;
     }
-    let content: ContentUnion;
-    try {
-        content = ContentUnionFromJSON(json['content']);
-    } catch {
-        content = json['content'];
-    }
     return {
         
-        'content': content,
+        'content': ContentUnionFromJSON(json['content']),
         'entryId': json['entryId'],
         'sortIndex': json['sortIndex'],
     };

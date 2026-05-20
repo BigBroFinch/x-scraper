@@ -30,7 +30,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { Media } from 'x-scraper'
+import type { Media } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

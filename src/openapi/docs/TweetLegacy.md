@@ -41,7 +41,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TweetLegacy } from 'x-scraper'
+import type { TweetLegacy } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

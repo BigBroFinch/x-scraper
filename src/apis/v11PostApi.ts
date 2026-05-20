@@ -1,5 +1,5 @@
 import { DefaultFlag } from '@/models';
-import { buildHeader, InitOverridesType } from '@/utils';
+import { buildTwitterApiResponse, InitOverridesType } from '@/utils';
 import { TwitterApiUtilsResponse } from '@/models';
 import * as i from '@/openapi';
 
@@ -25,7 +25,7 @@ export class V11PostApiUtils {
       includeProfileInterstitialType: 1, includeWantRetweets: 1, skipStatus: 1,
       userId: param.userId, ...param.extraParam,
     });
-    return { raw: { response: response.raw }, header: buildHeader(response.raw.headers), data: undefined };
+    return buildTwitterApiResponse(response, undefined);
   }
 
   async postDestroyFriendships(param: PostDestroyFriendshipsParam): Promise<TwitterApiUtilsResponse<undefined>> {
@@ -36,6 +36,6 @@ export class V11PostApiUtils {
       includeProfileInterstitialType: 0, includeWantRetweets: 0, skipStatus: 0,
       userId: param.userId, ...param.extraParam,
     });
-    return { raw: { response: response.raw }, header: buildHeader(response.raw.headers), data: undefined };
+    return buildTwitterApiResponse(response, undefined);
   }
 }

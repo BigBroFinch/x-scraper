@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { PeriscopeUser } from './PeriscopeUser';
 import {
     PeriscopeUserFromJSON,
@@ -227,7 +227,7 @@ export function BroadcastGraphQLFromJSONTyped(json: any, ignoreDiscriminator: bo
         'totalWatched': json['total_watched'] == null ? undefined : json['total_watched'],
         'totalWatching': json['total_watching'] == null ? undefined : json['total_watching'],
         'userResults': json['user_results'] == null ? undefined : BroadcastGraphQLUserResultsFromJSON(json['user_results']),
-        'viewCountGraph': json['view_count_graph'] == null ? undefined : json['view_count_graph'],
+        'viewCountGraph': safeOptionalArray(json['view_count_graph']),
     };
 }
 
@@ -266,7 +266,7 @@ export function BroadcastGraphQLToJSONTyped(value?: BroadcastGraphQL | null, ign
         'total_watched': value['totalWatched'],
         'total_watching': value['totalWatching'],
         'user_results': BroadcastGraphQLUserResultsToJSON(value['userResults']),
-        'view_count_graph': value['viewCountGraph'],
+        'view_count_graph': safeOptionalArray(value['viewCountGraph']),
     };
 }
 

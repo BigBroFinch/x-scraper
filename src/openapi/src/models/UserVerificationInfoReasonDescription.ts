@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { UserVerificationInfoReasonDescriptionEntities } from './UserVerificationInfoReasonDescriptionEntities';
 import {
     UserVerificationInfoReasonDescriptionEntitiesFromJSON,
@@ -60,7 +60,7 @@ export function UserVerificationInfoReasonDescriptionFromJSONTyped(json: any, ig
     }
     return {
         
-        'entities': ((json['entities'] as Array<any>).map(UserVerificationInfoReasonDescriptionEntitiesFromJSON)),
+        'entities': safeArrayMap(json['entities'], UserVerificationInfoReasonDescriptionEntitiesFromJSON),
         'text': json['text'],
     };
 }
@@ -76,7 +76,7 @@ export function UserVerificationInfoReasonDescriptionToJSONTyped(value?: UserVer
 
     return {
         
-        'entities': ((value['entities'] as Array<any>).map(UserVerificationInfoReasonDescriptionEntitiesToJSON)),
+        'entities': safeArrayMap(value['entities'], UserVerificationInfoReasonDescriptionEntitiesToJSON),
         'text': value['text'],
     };
 }

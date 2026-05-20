@@ -17,7 +17,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TimelineHalfCover } from 'x-scraper'
+import type { TimelineHalfCover } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

@@ -1,5 +1,5 @@
 import { DefaultFlag, TwitterApiUtilsResponse } from '@/models';
-import { buildHeader, InitOverridesType } from '@/utils';
+import { buildTwitterApiResponse, InitOverridesType } from '@/utils';
 import * as i from '@/openapi';
 
 export type GetLiveVideoStreamStatusParam = {
@@ -31,10 +31,6 @@ export class V11GetApiUtils {
     };
     const response = await this.api.getLiveVideoStreamStatusRaw(args);
     const data = await response.value();
-    return {
-      raw: { response: response.raw },
-      header: buildHeader(response.raw.headers),
-      data,
-    };
+    return buildTwitterApiResponse(response, data);
   }
 }

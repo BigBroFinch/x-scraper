@@ -19,7 +19,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TimelineTimelineModule } from 'x-scraper'
+import type { TimelineTimelineModule } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

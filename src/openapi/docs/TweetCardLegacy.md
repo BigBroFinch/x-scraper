@@ -15,7 +15,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TweetCardLegacy } from 'x-scraper'
+import type { TweetCardLegacy } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

@@ -23,11 +23,11 @@ post create friendships
 import {
   Configuration,
   V11PostApi,
-} from 'x-scraper';
-import type { PostCreateFriendshipsRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { PostCreateFriendshipsRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -177,11 +177,11 @@ post destroy friendships
 import {
   Configuration,
   V11PostApi,
-} from 'x-scraper';
-import type { PostDestroyFriendshipsRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { PostDestroyFriendshipsRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",

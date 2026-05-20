@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { AudioSpaceMentionedUser } from './AudioSpaceMentionedUser';
 import {
     AudioSpaceMentionedUserFromJSON,
@@ -268,7 +268,7 @@ export function AudioSpaceMetadataFromJSONTyped(json: any, ignoreDiscriminator: 
         'totalReplayWatched': json['total_replay_watched'] == null ? undefined : json['total_replay_watched'],
         'totalLiveListeners': json['total_live_listeners'] == null ? undefined : json['total_live_listeners'],
         'replyCount': json['reply_count'] == null ? undefined : json['reply_count'],
-        'mentionedUsers': json['mentioned_users'] == null ? undefined : ((json['mentioned_users'] as Array<any>).map(AudioSpaceMentionedUserFromJSON)),
+        'mentionedUsers': safeOptionalArrayMap(json['mentioned_users'], AudioSpaceMentionedUserFromJSON),
         'creatorResults': json['creator_results'] == null ? undefined : UserResultsFromJSON(json['creator_results']),
         'tweetResults': json['tweet_results'] == null ? undefined : ItemResultFromJSON(json['tweet_results']),
     };
@@ -310,7 +310,7 @@ export function AudioSpaceMetadataToJSONTyped(value?: AudioSpaceMetadata | null,
         'total_replay_watched': value['totalReplayWatched'],
         'total_live_listeners': value['totalLiveListeners'],
         'reply_count': value['replyCount'],
-        'mentioned_users': value['mentionedUsers'] == null ? undefined : ((value['mentionedUsers'] as Array<any>).map(AudioSpaceMentionedUserToJSON)),
+        'mentioned_users': safeOptionalArrayMap(value['mentionedUsers'], AudioSpaceMentionedUserToJSON),
         'creator_results': UserResultsToJSON(value['creatorResults']),
         'tweet_results': ItemResultToJSON(value['tweetResults']),
     };

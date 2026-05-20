@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { ErrorExtensions } from './ErrorExtensions';
 import {
     ErrorExtensionsFromJSON,
@@ -138,10 +138,10 @@ export function ErrorResponseFromJSONTyped(json: any, ignoreDiscriminator: boole
         'code': json['code'],
         'extensions': ErrorExtensionsFromJSON(json['extensions']),
         'kind': json['kind'],
-        'locations': json['locations'] == null ? undefined : ((json['locations'] as Array<any>).map(LocationFromJSON)),
+        'locations': safeOptionalArrayMap(json['locations'], LocationFromJSON),
         'message': json['message'],
         'name': json['name'],
-        'path': ((json['path'] as Array<any>).map(ErrorResponsePathInnerFromJSON)),
+        'path': safeArrayMap(json['path'], ErrorResponsePathInnerFromJSON),
         'retryAfter': json['retry_after'] == null ? undefined : json['retry_after'],
         'source': json['source'],
         'tracing': TracingFromJSON(json['tracing']),
@@ -162,10 +162,10 @@ export function ErrorResponseToJSONTyped(value?: ErrorResponse | null, ignoreDis
         'code': value['code'],
         'extensions': ErrorExtensionsToJSON(value['extensions']),
         'kind': value['kind'],
-        'locations': value['locations'] == null ? undefined : ((value['locations'] as Array<any>).map(LocationToJSON)),
+        'locations': safeOptionalArrayMap(value['locations'], LocationToJSON),
         'message': value['message'],
         'name': value['name'],
-        'path': ((value['path'] as Array<any>).map(ErrorResponsePathInnerToJSON)),
+        'path': safeArrayMap(value['path'], ErrorResponsePathInnerToJSON),
         'retry_after': value['retryAfter'],
         'source': value['source'],
         'tracing': TracingToJSON(value['tracing']),

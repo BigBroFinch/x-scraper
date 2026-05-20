@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { PostCreateTweetRequestVariablesReply } from './PostCreateTweetRequestVariablesReply';
 import {
     PostCreateTweetRequestVariablesReplyFromJSON,
@@ -118,7 +118,7 @@ export function PostCreateTweetRequestVariablesFromJSONTyped(json: any, ignoreDi
         'disallowedReplyOptions': json['disallowed_reply_options'] == null ? undefined : json['disallowed_reply_options'],
         'media': PostCreateTweetRequestVariablesMediaFromJSON(json['media']),
         'reply': json['reply'] == null ? undefined : PostCreateTweetRequestVariablesReplyFromJSON(json['reply']),
-        'semanticAnnotationIds': json['semantic_annotation_ids'],
+        'semanticAnnotationIds': safeArray(json['semantic_annotation_ids']),
         'tweetText': json['tweet_text'],
     };
 }
@@ -140,7 +140,7 @@ export function PostCreateTweetRequestVariablesToJSONTyped(value?: PostCreateTwe
         'disallowed_reply_options': value['disallowedReplyOptions'],
         'media': PostCreateTweetRequestVariablesMediaToJSON(value['media']),
         'reply': PostCreateTweetRequestVariablesReplyToJSON(value['reply']),
-        'semantic_annotation_ids': value['semanticAnnotationIds'],
+        'semantic_annotation_ids': safeArray(value['semanticAnnotationIds']),
         'tweet_text': value['tweetText'],
     };
 }

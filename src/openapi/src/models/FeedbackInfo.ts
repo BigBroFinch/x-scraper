@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { ClientEventInfo } from './ClientEventInfo';
 import {
     ClientEventInfoFromJSON,
@@ -59,7 +59,7 @@ export function FeedbackInfoFromJSONTyped(json: any, ignoreDiscriminator: boolea
     return {
         
         'clientEventInfo': json['clientEventInfo'] == null ? undefined : ClientEventInfoFromJSON(json['clientEventInfo']),
-        'feedbackKeys': json['feedbackKeys'] == null ? undefined : json['feedbackKeys'],
+        'feedbackKeys': safeOptionalArray(json['feedbackKeys']),
     };
 }
 
@@ -75,7 +75,7 @@ export function FeedbackInfoToJSONTyped(value?: FeedbackInfo | null, ignoreDiscr
     return {
         
         'clientEventInfo': ClientEventInfoToJSON(value['clientEventInfo']),
-        'feedbackKeys': value['feedbackKeys'],
+        'feedbackKeys': safeOptionalArray(value['feedbackKeys']),
     };
 }
 

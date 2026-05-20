@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { FavoriteTweet } from './FavoriteTweet';
 import {
     FavoriteTweetFromJSON,
@@ -67,7 +67,7 @@ export function FavoriteTweetResponseFromJSONTyped(json: any, ignoreDiscriminato
     return {
         
         'data': FavoriteTweetFromJSON(json['data']),
-        'errors': json['errors'] == null ? undefined : ((json['errors'] as Array<any>).map(ErrorResponseFromJSON)),
+        'errors': safeOptionalArrayMap(json['errors'], ErrorResponseFromJSON),
     };
 }
 
@@ -83,7 +83,7 @@ export function FavoriteTweetResponseToJSONTyped(value?: FavoriteTweetResponse |
     return {
         
         'data': FavoriteTweetToJSON(value['data']),
-        'errors': value['errors'] == null ? undefined : ((value['errors'] as Array<any>).map(ErrorResponseToJSON)),
+        'errors': safeOptionalArrayMap(value['errors'], ErrorResponseToJSON),
     };
 }
 

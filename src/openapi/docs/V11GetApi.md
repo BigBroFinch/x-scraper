@@ -24,11 +24,11 @@ get friends following list
 import {
   Configuration,
   V11GetApi,
-} from 'x-scraper';
-import type { GetFriendsFollowingListRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetFriendsFollowingListRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -187,11 +187,11 @@ get live video stream status
 import {
   Configuration,
   V11GetApi,
-} from 'x-scraper';
-import type { GetLiveVideoStreamStatusRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetLiveVideoStreamStatusRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -311,11 +311,11 @@ get search typeahead
 import {
   Configuration,
   V11GetApi,
-} from 'x-scraper';
-import type { GetSearchTypeaheadRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetSearchTypeaheadRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",

@@ -11,7 +11,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { SearchTimeline } from 'x-scraper'
+import type { SearchTimeline } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

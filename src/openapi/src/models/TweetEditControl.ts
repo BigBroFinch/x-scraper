@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TweetEditControlInitial } from './TweetEditControlInitial';
 import {
     TweetEditControlInitialFromJSON,
@@ -83,7 +83,7 @@ export function TweetEditControlFromJSONTyped(json: any, ignoreDiscriminator: bo
     return {
         
         'editControlInitial': json['edit_control_initial'] == null ? undefined : TweetEditControlInitialFromJSON(json['edit_control_initial']),
-        'editTweetIds': json['edit_tweet_ids'] == null ? undefined : json['edit_tweet_ids'],
+        'editTweetIds': safeOptionalArray(json['edit_tweet_ids']),
         'editableUntilMsecs': json['editable_until_msecs'] == null ? undefined : json['editable_until_msecs'],
         'editsRemaining': json['edits_remaining'] == null ? undefined : json['edits_remaining'],
         'initialTweetId': json['initial_tweet_id'] == null ? undefined : json['initial_tweet_id'],
@@ -103,7 +103,7 @@ export function TweetEditControlToJSONTyped(value?: TweetEditControl | null, ign
     return {
         
         'edit_control_initial': TweetEditControlInitialToJSON(value['editControlInitial']),
-        'edit_tweet_ids': value['editTweetIds'],
+        'edit_tweet_ids': safeOptionalArray(value['editTweetIds']),
         'editable_until_msecs': value['editableUntilMsecs'],
         'edits_remaining': value['editsRemaining'],
         'initial_tweet_id': value['initialTweetId'],

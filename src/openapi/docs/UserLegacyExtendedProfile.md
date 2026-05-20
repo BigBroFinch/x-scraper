@@ -11,7 +11,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { UserLegacyExtendedProfile } from 'x-scraper'
+import type { UserLegacyExtendedProfile } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

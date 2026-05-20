@@ -255,6 +255,10 @@ pnpm test
 pnpm generate
 ```
 
+OpenAPI generation uses the local `scripts/openapi-templates/typescript-fetch` template overlay.
+The overlay keeps generated model array conversion defensive against non-array payloads returned by X.
+Running the generator requires a Java runtime because `@openapitools/openapi-generator-cli` launches the OpenAPI Generator jar.
+
 ## `openapi/placeholder.json`
 
 `openapi/placeholder.json` is a runtime GraphQL operation template registry.

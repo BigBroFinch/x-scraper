@@ -11,7 +11,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { AllowDownloadStatus } from 'x-scraper'
+import type { AllowDownloadStatus } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

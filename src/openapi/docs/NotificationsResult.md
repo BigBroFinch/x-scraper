@@ -13,7 +13,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { NotificationsResult } from 'x-scraper'
+import type { NotificationsResult } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

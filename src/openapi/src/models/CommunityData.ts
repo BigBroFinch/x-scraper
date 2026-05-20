@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { PrimaryCommunityTopic } from './PrimaryCommunityTopic';
 import {
     PrimaryCommunityTopicFromJSON,
@@ -296,15 +296,15 @@ export function CommunityDataFromJSONTyped(json: any, ignoreDiscriminator: boole
         'joinPolicy': json['join_policy'] == null ? undefined : json['join_policy'],
         'joinRequestsResult': json['join_requests_result'] == null ? undefined : CommunityJoinRequestsResultFromJSON(json['join_requests_result']),
         'memberCount': json['member_count'] == null ? undefined : json['member_count'],
-        'membersFacepileResults': json['members_facepile_results'] == null ? undefined : ((json['members_facepile_results'] as Array<any>).map(UserResultsFromJSON)),
+        'membersFacepileResults': safeOptionalArrayMap(json['members_facepile_results'], UserResultsFromJSON),
         'moderatorCount': json['moderator_count'] == null ? undefined : json['moderator_count'],
         'name': json['name'] == null ? undefined : json['name'],
         'primaryCommunityTopic': json['primary_community_topic'] == null ? undefined : PrimaryCommunityTopicFromJSON(json['primary_community_topic']),
         'question': json['question'] == null ? undefined : json['question'],
         'role': json['role'] == null ? undefined : json['role'],
-        'rules': json['rules'] == null ? undefined : ((json['rules'] as Array<any>).map(CommunityRuleFromJSON)),
-        'searchTags': json['search_tags'] == null ? undefined : json['search_tags'],
-        'showOnlyUsersToDisplay': json['show_only_users_to_display'] == null ? undefined : json['show_only_users_to_display'],
+        'rules': safeOptionalArrayMap(json['rules'], CommunityRuleFromJSON),
+        'searchTags': safeOptionalArray(json['search_tags']),
+        'showOnlyUsersToDisplay': safeOptionalArray(json['show_only_users_to_display']),
         'urls': json['urls'] == null ? undefined : CommunityUrlsFromJSON(json['urls']),
         'viewerRelationship': json['viewer_relationship'] == null ? undefined : json['viewer_relationship'],
     };
@@ -336,15 +336,15 @@ export function CommunityDataToJSONTyped(value?: CommunityData | null, ignoreDis
         'join_policy': value['joinPolicy'],
         'join_requests_result': CommunityJoinRequestsResultToJSON(value['joinRequestsResult']),
         'member_count': value['memberCount'],
-        'members_facepile_results': value['membersFacepileResults'] == null ? undefined : ((value['membersFacepileResults'] as Array<any>).map(UserResultsToJSON)),
+        'members_facepile_results': safeOptionalArrayMap(value['membersFacepileResults'], UserResultsToJSON),
         'moderator_count': value['moderatorCount'],
         'name': value['name'],
         'primary_community_topic': PrimaryCommunityTopicToJSON(value['primaryCommunityTopic']),
         'question': value['question'],
         'role': value['role'],
-        'rules': value['rules'] == null ? undefined : ((value['rules'] as Array<any>).map(CommunityRuleToJSON)),
-        'search_tags': value['searchTags'],
-        'show_only_users_to_display': value['showOnlyUsersToDisplay'],
+        'rules': safeOptionalArrayMap(value['rules'], CommunityRuleToJSON),
+        'search_tags': safeOptionalArray(value['searchTags']),
+        'show_only_users_to_display': safeOptionalArray(value['showOnlyUsersToDisplay']),
         'urls': CommunityUrlsToJSON(value['urls']),
         'viewer_relationship': value['viewerRelationship'],
     };

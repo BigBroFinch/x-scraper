@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { InstructionUnion } from './InstructionUnion';
 import {
     InstructionUnionFromJSON,
@@ -65,7 +65,7 @@ export function TimelineFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     }
     return {
         
-        'instructions': ((json['instructions'] as Array<any>).map(InstructionUnionFromJSON)),
+        'instructions': safeArrayMap(json['instructions'], InstructionUnionFromJSON),
         'metadata': json['metadata'] == null ? undefined : json['metadata'],
         'responseObjects': json['responseObjects'] == null ? undefined : json['responseObjects'],
     };
@@ -82,7 +82,7 @@ export function TimelineToJSONTyped(value?: Timeline | null, ignoreDiscriminator
 
     return {
         
-        'instructions': ((value['instructions'] as Array<any>).map(InstructionUnionToJSON)),
+        'instructions': safeArrayMap(value['instructions'], InstructionUnionToJSON),
         'metadata': value['metadata'],
         'responseObjects': value['responseObjects'],
     };

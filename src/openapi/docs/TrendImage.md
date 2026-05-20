@@ -11,7 +11,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TrendImage } from 'x-scraper'
+import type { TrendImage } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { ArticleCoverMediaColorInfoPalette } from './ArticleCoverMediaColorInfoPalette';
 import {
     ArticleCoverMediaColorInfoPaletteFromJSON,
@@ -53,7 +53,7 @@ export function ArticleCoverMediaColorInfoFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
-        'palette': ((json['palette'] as Array<any>).map(ArticleCoverMediaColorInfoPaletteFromJSON)),
+        'palette': safeArrayMap(json['palette'], ArticleCoverMediaColorInfoPaletteFromJSON),
     };
 }
 
@@ -68,7 +68,7 @@ export function ArticleCoverMediaColorInfoToJSONTyped(value?: ArticleCoverMediaC
 
     return {
         
-        'palette': ((value['palette'] as Array<any>).map(ArticleCoverMediaColorInfoPaletteToJSON)),
+        'palette': safeArrayMap(value['palette'], ArticleCoverMediaColorInfoPaletteToJSON),
     };
 }
 

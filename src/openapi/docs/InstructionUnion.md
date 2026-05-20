@@ -29,7 +29,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { InstructionUnion } from 'x-scraper'
+import type { InstructionUnion } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

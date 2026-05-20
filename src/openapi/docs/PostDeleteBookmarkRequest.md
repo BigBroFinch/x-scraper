@@ -12,7 +12,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { PostDeleteBookmarkRequest } from 'x-scraper'
+import type { PostDeleteBookmarkRequest } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

@@ -15,7 +15,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { UserResultByScreenNameResult } from 'x-scraper'
+import type { UserResultByScreenNameResult } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

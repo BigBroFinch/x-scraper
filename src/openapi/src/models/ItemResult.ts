@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TypeName } from './TypeName';
 import {
     TypeNameFromJSON,
@@ -65,16 +65,10 @@ export function ItemResultFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     if (json == null) {
         return json;
     }
-    let result: TweetUnion | undefined;
-    try {
-        result = json['result'] == null ? undefined : TweetUnionFromJSON(json['result']);
-    } catch {
-        result = json['result'];
-    }
     return {
         
         'typename': json['__typename'] == null ? undefined : TypeNameFromJSON(json['__typename']),
-        'result': result,
+        'result': json['result'] == null ? undefined : TweetUnionFromJSON(json['result']),
     };
 }
 

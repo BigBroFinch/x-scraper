@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { MediaOriginalInfoFocusRect } from './MediaOriginalInfoFocusRect';
 import {
     MediaOriginalInfoFocusRectFromJSON,
@@ -66,7 +66,7 @@ export function MediaOriginalInfoFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'focusRects': json['focus_rects'] == null ? undefined : ((json['focus_rects'] as Array<any>).map(MediaOriginalInfoFocusRectFromJSON)),
+        'focusRects': safeOptionalArrayMap(json['focus_rects'], MediaOriginalInfoFocusRectFromJSON),
         'height': json['height'],
         'width': json['width'],
     };
@@ -83,7 +83,7 @@ export function MediaOriginalInfoToJSONTyped(value?: MediaOriginalInfo | null, i
 
     return {
         
-        'focus_rects': value['focusRects'] == null ? undefined : ((value['focusRects'] as Array<any>).map(MediaOriginalInfoFocusRectToJSON)),
+        'focus_rects': safeOptionalArrayMap(value['focusRects'], MediaOriginalInfoFocusRectToJSON),
         'height': value['height'],
         'width': value['width'],
     };

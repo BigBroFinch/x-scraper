@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { MediaExtended } from './MediaExtended';
 import {
     MediaExtendedFromJSON,
@@ -53,7 +53,7 @@ export function ExtendedEntitiesFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'media': ((json['media'] as Array<any>).map(MediaExtendedFromJSON)),
+        'media': safeArrayMap(json['media'], MediaExtendedFromJSON),
     };
 }
 
@@ -68,7 +68,7 @@ export function ExtendedEntitiesToJSONTyped(value?: ExtendedEntities | null, ign
 
     return {
         
-        'media': ((value['media'] as Array<any>).map(MediaExtendedToJSON)),
+        'media': safeArrayMap(value['media'], MediaExtendedToJSON),
     };
 }
 

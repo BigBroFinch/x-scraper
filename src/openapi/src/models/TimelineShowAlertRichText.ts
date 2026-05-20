@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 /**
  * 
  * @export
@@ -50,7 +50,7 @@ export function TimelineShowAlertRichTextFromJSONTyped(json: any, ignoreDiscrimi
     }
     return {
         
-        'entities': json['entities'] == null ? undefined : json['entities'],
+        'entities': safeOptionalArray(json['entities']),
         'text': json['text'] == null ? undefined : json['text'],
     };
 }
@@ -66,7 +66,7 @@ export function TimelineShowAlertRichTextToJSONTyped(value?: TimelineShowAlertRi
 
     return {
         
-        'entities': value['entities'],
+        'entities': safeOptionalArray(value['entities']),
         'text': value['text'],
     };
 }

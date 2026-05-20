@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { NoteTweet } from './NoteTweet';
 import {
     NoteTweetFromJSON,
@@ -348,18 +348,6 @@ export function TweetFromJSONTyped(json: any, ignoreDiscriminator: boolean): Twe
     if (json == null) {
         return json;
     }
-    let core: UserResultCore | undefined;
-    try {
-        core = json['core'] == null ? undefined : UserResultCoreFromJSON(json['core']);
-    } catch {
-        core = json['core'];
-    }
-    let quotedStatusResult: ItemResult | undefined;
-    try {
-        quotedStatusResult = json['quoted_status_result'] == null ? undefined : ItemResultFromJSON(json['quoted_status_result']);
-    } catch {
-        quotedStatusResult = json['quoted_status_result'];
-    }
     return {
         
         'typename': json['__typename'] == null ? undefined : TypeNameFromJSON(json['__typename']),
@@ -369,11 +357,11 @@ export function TweetFromJSONTyped(json: any, ignoreDiscriminator: boolean): Twe
         'card': json['card'] == null ? undefined : TweetCardFromJSON(json['card']),
         'communityRelationship': json['community_relationship'] == null ? undefined : CommunityRelationshipFromJSON(json['community_relationship']),
         'communityResults': json['community_results'] == null ? undefined : CommunityFromJSON(json['community_results']),
-        'core': core,
+        'core': json['core'] == null ? undefined : UserResultCoreFromJSON(json['core']),
         'editControl': json['edit_control'] == null ? undefined : TweetEditControlFromJSON(json['edit_control']),
         'editPrespective': json['edit_prespective'] == null ? undefined : TweetEditPrespectiveFromJSON(json['edit_prespective']),
         'grokAnalysisButton': json['grok_analysis_button'] == null ? undefined : json['grok_analysis_button'],
-        'grokAnalysisFollowups': json['grok_analysis_followups'] == null ? undefined : json['grok_analysis_followups'],
+        'grokAnalysisFollowups': safeOptionalArray(json['grok_analysis_followups']),
         'grokShareAttachment': json['grok_share_attachment'] == null ? undefined : GrokShareAttachmentFromJSON(json['grok_share_attachment']),
         'hasBirdwatchNotes': json['has_birdwatch_notes'] == null ? undefined : json['has_birdwatch_notes'],
         'isTranslatable': json['is_translatable'] == null ? undefined : json['is_translatable'],
@@ -382,7 +370,7 @@ export function TweetFromJSONTyped(json: any, ignoreDiscriminator: boolean): Twe
         'previousCounts': json['previous_counts'] == null ? undefined : TweetPreviousCountsFromJSON(json['previous_counts']),
         'quickPromoteEligibility': json['quick_promote_eligibility'] == null ? undefined : json['quick_promote_eligibility'],
         'quotedRefResult': json['quotedRefResult'] == null ? undefined : QuotedRefResultFromJSON(json['quotedRefResult']),
-        'quotedStatusResult': quotedStatusResult,
+        'quotedStatusResult': json['quoted_status_result'] == null ? undefined : ItemResultFromJSON(json['quoted_status_result']),
         'restId': json['rest_id'],
         'source': json['source'] == null ? undefined : json['source'],
         'superFollowsReplyUserResult': json['superFollowsReplyUserResult'] == null ? undefined : SuperFollowsReplyUserResultFromJSON(json['superFollowsReplyUserResult']),
@@ -415,7 +403,7 @@ export function TweetToJSONTyped(value?: Tweet | null, ignoreDiscriminator: bool
         'edit_control': TweetEditControlToJSON(value['editControl']),
         'edit_prespective': TweetEditPrespectiveToJSON(value['editPrespective']),
         'grok_analysis_button': value['grokAnalysisButton'],
-        'grok_analysis_followups': value['grokAnalysisFollowups'],
+        'grok_analysis_followups': safeOptionalArray(value['grokAnalysisFollowups']),
         'grok_share_attachment': GrokShareAttachmentToJSON(value['grokShareAttachment']),
         'has_birdwatch_notes': value['hasBirdwatchNotes'],
         'is_translatable': value['isTranslatable'],

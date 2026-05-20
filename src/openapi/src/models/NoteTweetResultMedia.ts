@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { NoteTweetResultMediaInlineMedia } from './NoteTweetResultMediaInlineMedia';
 import {
     NoteTweetResultMediaInlineMediaFromJSON,
@@ -53,7 +53,7 @@ export function NoteTweetResultMediaFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
-        'inlineMedia': ((json['inline_media'] as Array<any>).map(NoteTweetResultMediaInlineMediaFromJSON)),
+        'inlineMedia': safeArrayMap(json['inline_media'], NoteTweetResultMediaInlineMediaFromJSON),
     };
 }
 
@@ -68,7 +68,7 @@ export function NoteTweetResultMediaToJSONTyped(value?: NoteTweetResultMedia | n
 
     return {
         
-        'inline_media': ((value['inlineMedia'] as Array<any>).map(NoteTweetResultMediaInlineMediaToJSON)),
+        'inline_media': safeArrayMap(value['inlineMedia'], NoteTweetResultMediaInlineMediaToJSON),
     };
 }
 

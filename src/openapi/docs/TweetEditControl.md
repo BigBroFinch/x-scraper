@@ -16,7 +16,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TweetEditControl } from 'x-scraper'
+import type { TweetEditControl } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { UrtEndpointRequestParams } from './UrtEndpointRequestParams';
 import {
     UrtEndpointRequestParamsFromJSON,
@@ -60,7 +60,7 @@ export function UrtEndpointOptionsFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'requestParams': ((json['requestParams'] as Array<any>).map(UrtEndpointRequestParamsFromJSON)),
+        'requestParams': safeArrayMap(json['requestParams'], UrtEndpointRequestParamsFromJSON),
         'title': json['title'],
     };
 }
@@ -76,7 +76,7 @@ export function UrtEndpointOptionsToJSONTyped(value?: UrtEndpointOptions | null,
 
     return {
         
-        'requestParams': ((value['requestParams'] as Array<any>).map(UrtEndpointRequestParamsToJSON)),
+        'requestParams': safeArrayMap(value['requestParams'], UrtEndpointRequestParamsToJSON),
         'title': value['title'],
     };
 }

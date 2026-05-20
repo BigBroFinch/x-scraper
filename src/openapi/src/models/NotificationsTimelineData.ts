@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { NotificationsViewerV2 } from './NotificationsViewerV2';
 import {
     NotificationsViewerV2FromJSON,

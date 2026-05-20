@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TimelineCoverBehavior } from './TimelineCoverBehavior';
 import {
     TimelineCoverBehaviorFromJSON,
@@ -105,7 +105,7 @@ export function CoverCtaFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         
         'text': json['Text'] == null ? undefined : json['Text'],
         'buttonStyle': json['buttonStyle'] == null ? undefined : json['buttonStyle'],
-        'callbacks': ((json['callbacks'] as Array<any>).map(CallbackFromJSON)),
+        'callbacks': safeArrayMap(json['callbacks'], CallbackFromJSON),
         'clientEventInfo': CtaClientEventInfoFromJSON(json['clientEventInfo']),
         'ctaBehavior': TimelineCoverBehaviorFromJSON(json['ctaBehavior']),
     };
@@ -124,7 +124,7 @@ export function CoverCtaToJSONTyped(value?: CoverCta | null, ignoreDiscriminator
         
         'Text': value['text'],
         'buttonStyle': value['buttonStyle'],
-        'callbacks': ((value['callbacks'] as Array<any>).map(CallbackToJSON)),
+        'callbacks': safeArrayMap(value['callbacks'], CallbackToJSON),
         'clientEventInfo': CtaClientEventInfoToJSON(value['clientEventInfo']),
         'ctaBehavior': TimelineCoverBehaviorToJSON(value['ctaBehavior']),
     };

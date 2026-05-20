@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TextEntity } from './TextEntity';
 import {
     TextEntityFromJSON,
@@ -60,7 +60,7 @@ export function TextFromJSONTyped(json: any, ignoreDiscriminator: boolean): Text
     }
     return {
         
-        'entities': ((json['entities'] as Array<any>).map(TextEntityFromJSON)),
+        'entities': safeArrayMap(json['entities'], TextEntityFromJSON),
         'text': json['text'],
     };
 }
@@ -76,7 +76,7 @@ export function TextToJSONTyped(value?: Text | null, ignoreDiscriminator: boolea
 
     return {
         
-        'entities': ((value['entities'] as Array<any>).map(TextEntityToJSON)),
+        'entities': safeArrayMap(value['entities'], TextEntityToJSON),
         'text': value['text'],
     };
 }

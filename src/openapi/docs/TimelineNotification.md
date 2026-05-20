@@ -18,7 +18,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TimelineNotification } from 'x-scraper'
+import type { TimelineNotification } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

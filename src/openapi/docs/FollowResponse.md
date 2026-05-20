@@ -12,7 +12,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { FollowResponse } from 'x-scraper'
+import type { FollowResponse } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

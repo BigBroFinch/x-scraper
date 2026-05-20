@@ -13,7 +13,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TweetInterstitialRevealText } from 'x-scraper'
+import type { TweetInterstitialRevealText } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

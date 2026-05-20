@@ -11,7 +11,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { CommunityJoinAction } from 'x-scraper'
+import type { CommunityJoinAction } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

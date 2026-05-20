@@ -19,7 +19,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { AudioSpaceParticipant } from 'x-scraper'
+import type { AudioSpaceParticipant } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

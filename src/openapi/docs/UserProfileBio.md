@@ -11,7 +11,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { UserProfileBio } from 'x-scraper'
+import type { UserProfileBio } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

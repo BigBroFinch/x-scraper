@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { TweetCardPlatformData } from './TweetCardPlatformData';
 import {
     TweetCardPlatformDataFromJSON,
@@ -93,11 +93,11 @@ export function TweetCardLegacyFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'bindingValues': ((json['binding_values'] as Array<any>).map(TweetCardLegacyBindingValueFromJSON)),
+        'bindingValues': safeArrayMap(json['binding_values'], TweetCardLegacyBindingValueFromJSON),
         'cardPlatform': json['card_platform'] == null ? undefined : TweetCardPlatformDataFromJSON(json['card_platform']),
         'name': json['name'],
         'url': json['url'],
-        'userRefsResults': json['user_refs_results'] == null ? undefined : ((json['user_refs_results'] as Array<any>).map(UserResultsFromJSON)),
+        'userRefsResults': safeOptionalArrayMap(json['user_refs_results'], UserResultsFromJSON),
     };
 }
 
@@ -112,11 +112,11 @@ export function TweetCardLegacyToJSONTyped(value?: TweetCardLegacy | null, ignor
 
     return {
         
-        'binding_values': ((value['bindingValues'] as Array<any>).map(TweetCardLegacyBindingValueToJSON)),
+        'binding_values': safeArrayMap(value['bindingValues'], TweetCardLegacyBindingValueToJSON),
         'card_platform': TweetCardPlatformDataToJSON(value['cardPlatform']),
         'name': value['name'],
         'url': value['url'],
-        'user_refs_results': value['userRefsResults'] == null ? undefined : ((value['userRefsResults'] as Array<any>).map(UserResultsToJSON)),
+        'user_refs_results': safeOptionalArrayMap(value['userRefsResults'], UserResultsToJSON),
     };
 }
 

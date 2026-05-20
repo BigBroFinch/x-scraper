@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 /**
  * 
  * @export
@@ -52,7 +52,7 @@ export function PostCreateTweetRequestVariablesReplyFromJSONTyped(json: any, ign
     }
     return {
         
-        'excludeReplyUserIds': json['exclude_reply_user_ids'],
+        'excludeReplyUserIds': safeArray(json['exclude_reply_user_ids']),
         'inReplyToTweetId': json['in_reply_to_tweet_id'],
     };
 }
@@ -68,7 +68,7 @@ export function PostCreateTweetRequestVariablesReplyToJSONTyped(value?: PostCrea
 
     return {
         
-        'exclude_reply_user_ids': value['excludeReplyUserIds'],
+        'exclude_reply_user_ids': safeArray(value['excludeReplyUserIds']),
         'in_reply_to_tweet_id': value['inReplyToTweetId'],
     };
 }

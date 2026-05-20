@@ -15,7 +15,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TimelineGeneralContext } from 'x-scraper'
+import type { TimelineGeneralContext } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

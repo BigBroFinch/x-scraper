@@ -25,7 +25,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { ContentUnion } from 'x-scraper'
+import type { ContentUnion } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

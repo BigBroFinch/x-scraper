@@ -12,7 +12,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { DeleteTweetResponse } from 'x-scraper'
+import type { DeleteTweetResponse } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

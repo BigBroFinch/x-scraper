@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { SocialContextLandingUrl } from './SocialContextLandingUrl';
 import {
     SocialContextLandingUrlFromJSON,
@@ -101,7 +101,7 @@ export function TimelineGeneralContextFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'contextImageUrls': json['contextImageUrls'] == null ? undefined : json['contextImageUrls'],
+        'contextImageUrls': safeOptionalArray(json['contextImageUrls']),
         'contextType': json['contextType'] == null ? undefined : json['contextType'],
         'landingUrl': json['landingUrl'] == null ? undefined : SocialContextLandingUrlFromJSON(json['landingUrl']),
         'text': json['text'] == null ? undefined : json['text'],
@@ -120,7 +120,7 @@ export function TimelineGeneralContextToJSONTyped(value?: TimelineGeneralContext
 
     return {
         
-        'contextImageUrls': value['contextImageUrls'],
+        'contextImageUrls': safeOptionalArray(value['contextImageUrls']),
         'contextType': value['contextType'],
         'landingUrl': SocialContextLandingUrlToJSON(value['landingUrl']),
         'text': value['text'],

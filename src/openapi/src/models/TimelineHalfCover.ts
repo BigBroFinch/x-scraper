@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { Callback } from './Callback';
 import {
     CallbackFromJSON,
@@ -129,7 +129,7 @@ export function TimelineHalfCoverFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'dismissible': json['dismissible'],
         'halfCoverDisplayType': json['halfCoverDisplayType'],
-        'impressionCallbacks': ((json['impressionCallbacks'] as Array<any>).map(CallbackFromJSON)),
+        'impressionCallbacks': safeArrayMap(json['impressionCallbacks'], CallbackFromJSON),
         'primaryCoverCta': CoverCtaFromJSON(json['primaryCoverCta']),
         'primaryText': TextFromJSON(json['primaryText']),
         'secondaryText': TextFromJSON(json['secondaryText']),
@@ -150,7 +150,7 @@ export function TimelineHalfCoverToJSONTyped(value?: TimelineHalfCover | null, i
         
         'dismissible': value['dismissible'],
         'halfCoverDisplayType': value['halfCoverDisplayType'],
-        'impressionCallbacks': ((value['impressionCallbacks'] as Array<any>).map(CallbackToJSON)),
+        'impressionCallbacks': safeArrayMap(value['impressionCallbacks'], CallbackToJSON),
         'primaryCoverCta': CoverCtaToJSON(value['primaryCoverCta']),
         'primaryText': TextToJSON(value['primaryText']),
         'secondaryText': TextToJSON(value['secondaryText']),

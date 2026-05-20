@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { UserProfessionalCategory } from './UserProfessionalCategory';
 import {
     UserProfessionalCategoryFromJSON,
@@ -78,7 +78,7 @@ export function UserProfessionalFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'category': ((json['category'] as Array<any>).map(UserProfessionalCategoryFromJSON)),
+        'category': safeArrayMap(json['category'], UserProfessionalCategoryFromJSON),
         'professionalType': json['professional_type'],
         'restId': json['rest_id'],
     };
@@ -95,7 +95,7 @@ export function UserProfessionalToJSONTyped(value?: UserProfessional | null, ign
 
     return {
         
-        'category': ((value['category'] as Array<any>).map(UserProfessionalCategoryToJSON)),
+        'category': safeArrayMap(value['category'], UserProfessionalCategoryToJSON),
         'professional_type': value['professionalType'],
         'rest_id': value['restId'],
     };

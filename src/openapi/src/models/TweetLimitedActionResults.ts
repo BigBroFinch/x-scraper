@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { LimitedActionResultsData } from './LimitedActionResultsData';
 import {
     LimitedActionResultsDataFromJSON,
@@ -53,7 +53,7 @@ export function TweetLimitedActionResultsFromJSONTyped(json: any, ignoreDiscrimi
     }
     return {
         
-        'limitedActions': ((json['limited_actions'] as Array<any>).map(LimitedActionResultsDataFromJSON)),
+        'limitedActions': safeArrayMap(json['limited_actions'], LimitedActionResultsDataFromJSON),
     };
 }
 
@@ -68,7 +68,7 @@ export function TweetLimitedActionResultsToJSONTyped(value?: TweetLimitedActionR
 
     return {
         
-        'limited_actions': ((value['limitedActions'] as Array<any>).map(LimitedActionResultsDataToJSON)),
+        'limited_actions': safeArrayMap(value['limitedActions'], LimitedActionResultsDataToJSON),
     };
 }
 

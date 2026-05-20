@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 /**
  * 
  * @export
@@ -71,7 +71,7 @@ export function NoteTweetResultRichTextTagFromJSONTyped(json: any, ignoreDiscrim
     return {
         
         'fromIndex': json['from_index'],
-        'richtextTypes': json['richtext_types'],
+        'richtextTypes': safeArray(json['richtext_types']),
         'toIndex': json['to_index'],
     };
 }
@@ -88,7 +88,7 @@ export function NoteTweetResultRichTextTagToJSONTyped(value?: NoteTweetResultRic
     return {
         
         'from_index': value['fromIndex'],
-        'richtext_types': value['richtextTypes'],
+        'richtext_types': safeArray(value['richtextTypes']),
         'to_index': value['toIndex'],
     };
 }

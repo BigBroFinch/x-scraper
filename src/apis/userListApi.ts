@@ -6,10 +6,10 @@ import {
   UserApiUtilsData,
 } from '@/models';
 import {
-  buildHeader,
   entriesCursor,
   errorCheck,
-  getKwargs,
+  executeGraphQLRequest,
+  GraphQLOperationRegistry,
   InitOverridesType,
   instructionToEntry,
   userEntriesConverter,
@@ -30,27 +30,31 @@ export class UserListApiUtils {
   api: i.UserListApi;
   flag: DefaultFlag;
   initOverrides: InitOverridesType;
+  operations: GraphQLOperationRegistry;
 
   constructor(api: i.UserListApi, flag: DefaultFlag, initOverrides: InitOverridesType) {
     this.api = api;
     this.flag = flag;
     this.initOverrides = initOverrides;
+    this.operations = new GraphQLOperationRegistry(flag, initOverrides);
   }
 
   async request<T>(param: RequestParam<i.InstructionUnion[], T>): Promise<ResponseType> {
     const apiFn: typeof param.apiFn = param.apiFn.bind(this.api);
-    const args = getKwargs(this.flag[param.key], param.param);
-    const response = await apiFn(args, this.initOverrides(this.flag[param.key]));
-    const instruction = param.convertFn(await response.value());
-    const entry = instructionToEntry(instruction);
-    const userList = userEntriesConverter(entry);
-    const data = userResultConverter(userList);
+    return executeGraphQLRequest({
+      apiFn,
+      operations: this.operations,
+      key: param.key,
+      param: param.param,
+      convertFn: (value) => {
+        const instruction = param.convertFn(value);
+        const entry = instructionToEntry(instruction);
+        const userList = userEntriesConverter(entry);
+        const data = userResultConverter(userList);
 
-    return {
-      raw: { response: response.raw },
-      header: buildHeader(response.raw.headers),
-      data: { raw: { instruction, entry }, data, cursor: entriesCursor(entry) },
-    };
+        return { raw: { instruction, entry }, data, cursor: entriesCursor(entry) };
+      },
+    });
   }
 
   async getFollowers(param: GetFollowersParam): Promise<ResponseType> {

@@ -27,11 +27,11 @@ get user list of blue verified followers
 import {
   Configuration,
   UserListApi,
-} from 'x-scraper';
-import type { GetBlueVerifiedFollowersRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetBlueVerifiedFollowersRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -148,11 +148,11 @@ get tweet favoriters
 import {
   Configuration,
   UserListApi,
-} from 'x-scraper';
-import type { GetFavoritersRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetFavoritersRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -269,11 +269,11 @@ get user list of followers
 import {
   Configuration,
   UserListApi,
-} from 'x-scraper';
-import type { GetFollowersRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetFollowersRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -390,11 +390,11 @@ get followers you know
 import {
   Configuration,
   UserListApi,
-} from 'x-scraper';
-import type { GetFollowersYouKnowRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetFollowersYouKnowRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -511,11 +511,11 @@ get user list of following
 import {
   Configuration,
   UserListApi,
-} from 'x-scraper';
-import type { GetFollowingRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetFollowingRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",
@@ -632,11 +632,11 @@ get tweet retweeters
 import {
   Configuration,
   UserListApi,
-} from 'x-scraper';
-import type { GetRetweetersRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetRetweetersRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",

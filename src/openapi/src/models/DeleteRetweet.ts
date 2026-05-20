@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { Retweet } from './Retweet';
 import {
     RetweetFromJSON,
@@ -53,7 +53,7 @@ export function DeleteRetweetFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
-        'result': ((json['result'] as Array<any>).map(RetweetFromJSON)),
+        'result': safeArrayMap(json['result'], RetweetFromJSON),
     };
 }
 
@@ -68,7 +68,7 @@ export function DeleteRetweetToJSONTyped(value?: DeleteRetweet | null, ignoreDis
 
     return {
         
-        'result': ((value['result'] as Array<any>).map(RetweetToJSON)),
+        'result': safeArrayMap(value['result'], RetweetToJSON),
     };
 }
 

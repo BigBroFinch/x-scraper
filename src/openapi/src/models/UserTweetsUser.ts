@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { UserTweetsResultV1 } from './UserTweetsResultV1';
 import {
     UserTweetsResultV1FromJSON,

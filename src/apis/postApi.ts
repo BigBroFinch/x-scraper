@@ -1,5 +1,5 @@
 import { DefaultFlag, TwitterApiUtilsResponse } from '@/models';
-import { buildHeader, InitOverridesType } from '@/utils';
+import { buildTwitterApiResponse, GraphQLOperationRegistry, InitOverridesType } from '@/utils';
 import * as i from '@/openapi';
 
 type PostCreateTweetParam = {
@@ -22,18 +22,21 @@ export class PostApiUtils {
   api: i.PostApi;
   flag: DefaultFlag;
   initOverrides: InitOverridesType;
+  operations: GraphQLOperationRegistry;
 
   constructor(api: i.PostApi, flag: DefaultFlag, initOverrides: InitOverridesType) {
     this.api = api;
     this.flag = flag;
     this.initOverrides = initOverrides;
+    this.operations = new GraphQLOperationRegistry(flag, initOverrides);
   }
 
   async postCreateTweet(param: PostCreateTweetParam): Promise<TwitterApiUtilsResponse<i.CreateTweetResponse>> {
     const args = { tweetText: param.tweetText, ...param.extraParam };
     const queryId = 'CreateTweet';
-    const features = i.PostCreateTweetRequestFeaturesFromJSON(this.flag[queryId]['features']);
-    const variables = i.PostCreateTweetRequestVariablesFromJSON(this.flag[queryId]['variables']);
+    const template = this.operations.template(queryId);
+    const features = i.PostCreateTweetRequestFeaturesFromJSON(template['features']);
+    const variables = i.PostCreateTweetRequestVariablesFromJSON(template['variables']);
 
     if (param.mediaIds) {
       variables.media.mediaEntities = param.mediaIds.map((mediaId, index) => ({
@@ -52,62 +55,62 @@ export class PostApiUtils {
     variables.disallowedReplyOptions = null as any;
 
     const response = await this.api.postCreateTweetRaw({
-      pathQueryId: this.flag[queryId]['queryId'],
+      pathQueryId: template['queryId'],
       postCreateTweetRequest: {
-        queryId: this.flag[queryId]['queryId'],
+        queryId: template['queryId'],
         features,
         variables: { ...variables, ...args },
       },
     });
-    return {
-      raw: { response: response.raw },
-      header: buildHeader(response.raw.headers),
-      data: await response.value(),
-    };
+    return buildTwitterApiResponse(response, await response.value());
   }
 
   async postDeleteTweet(param: PostDeleteTweetParam): Promise<TwitterApiUtilsResponse<i.DeleteTweetResponse>> {
     const args = { tweetId: param.tweetId, ...param.extraParam };
     const queryId = 'DeleteTweet';
-    const variables = i.PostCreateRetweetRequestVariablesFromJSON(this.flag[queryId]['variables']);
+    const template = this.operations.template(queryId);
+    const variables = i.PostCreateRetweetRequestVariablesFromJSON(template['variables']);
     const response = await this.api.postDeleteTweetRaw({
-      pathQueryId: this.flag[queryId]['queryId'],
-      postDeleteTweetRequest: { queryId: this.flag[queryId]['queryId'], variables: { ...variables, ...args } },
+      pathQueryId: template['queryId'],
+      postDeleteTweetRequest: { queryId: template['queryId'], variables: { ...variables, ...args } },
     });
-    return { raw: { response: response.raw }, header: buildHeader(response.raw.headers), data: await response.value() };
+    return buildTwitterApiResponse(response, await response.value());
   }
 
   async postCreateRetweet(param: PostCreateRetweetParam): Promise<TwitterApiUtilsResponse<i.CreateRetweetResponse>> {
     const args = { tweetId: param.tweetId, ...param.extraParam };
     const queryId = 'CreateRetweet';
-    const variables = i.PostCreateRetweetRequestVariablesFromJSON(this.flag[queryId]['variables']);
+    const template = this.operations.template(queryId);
+    const variables = i.PostCreateRetweetRequestVariablesFromJSON(template['variables']);
     const response = await this.api.postCreateRetweetRaw({
-      pathQueryId: this.flag[queryId]['queryId'],
-      postCreateRetweetRequest: { queryId: this.flag[queryId]['queryId'], variables: { ...variables, ...args } },
+      pathQueryId: template['queryId'],
+      postCreateRetweetRequest: { queryId: template['queryId'], variables: { ...variables, ...args } },
     });
-    return { raw: { response: response.raw }, header: buildHeader(response.raw.headers), data: await response.value() };
+    return buildTwitterApiResponse(response, await response.value());
   }
 
   async postDeleteRetweet(param: PostDeleteRetweetParam): Promise<TwitterApiUtilsResponse<i.DeleteRetweetResponse>> {
     const args = { sourceTweetId: param.sourceTweetId, ...param.extraParam };
     const queryId = 'DeleteRetweet';
-    const variables = i.PostDeleteRetweetRequestVariablesFromJSON(this.flag[queryId]['variables']);
+    const template = this.operations.template(queryId);
+    const variables = i.PostDeleteRetweetRequestVariablesFromJSON(template['variables']);
     const response = await this.api.postDeleteRetweetRaw({
-      pathQueryId: this.flag[queryId]['queryId'],
-      postDeleteRetweetRequest: { queryId: this.flag[queryId]['queryId'], variables: { ...variables, ...args } },
+      pathQueryId: template['queryId'],
+      postDeleteRetweetRequest: { queryId: template['queryId'], variables: { ...variables, ...args } },
     });
-    return { raw: { response: response.raw }, header: buildHeader(response.raw.headers), data: await response.value() };
+    return buildTwitterApiResponse(response, await response.value());
   }
 
   async postFavoriteTweet(param: PostFavoriteTweetParam): Promise<TwitterApiUtilsResponse<i.FavoriteTweetResponse>> {
     const args = { tweetId: param.tweetId, ...param.extraParam };
     const queryId = 'FavoriteTweet';
-    const variables = i.PostCreateRetweetRequestVariablesFromJSON(this.flag[queryId]['variables']);
+    const template = this.operations.template(queryId);
+    const variables = i.PostCreateRetweetRequestVariablesFromJSON(template['variables']);
     const response = await this.api.postFavoriteTweetRaw({
-      pathQueryId: this.flag[queryId]['queryId'],
-      postFavoriteTweetRequest: { queryId: this.flag[queryId]['queryId'], variables: { ...variables, ...args } },
+      pathQueryId: template['queryId'],
+      postFavoriteTweetRequest: { queryId: template['queryId'], variables: { ...variables, ...args } },
     });
-    return { raw: { response: response.raw }, header: buildHeader(response.raw.headers), data: await response.value() };
+    return buildTwitterApiResponse(response, await response.value());
   }
 
   async postUnfavoriteTweet(
@@ -115,11 +118,12 @@ export class PostApiUtils {
   ): Promise<TwitterApiUtilsResponse<i.UnfavoriteTweetResponse>> {
     const args = { tweetId: param.tweetId, ...param.extraParam };
     const queryId = 'UnfavoriteTweet';
-    const variables = i.PostCreateRetweetRequestVariablesFromJSON(this.flag[queryId]['variables']);
+    const template = this.operations.template(queryId);
+    const variables = i.PostCreateRetweetRequestVariablesFromJSON(template['variables']);
     const response = await this.api.postUnfavoriteTweetRaw({
-      pathQueryId: this.flag[queryId]['queryId'],
-      postUnfavoriteTweetRequest: { queryId: this.flag[queryId]['queryId'], variables: { ...variables, ...args } },
+      pathQueryId: template['queryId'],
+      postUnfavoriteTweetRequest: { queryId: template['queryId'], variables: { ...variables, ...args } },
     });
-    return { raw: { response: response.raw }, header: buildHeader(response.raw.headers), data: await response.value() };
+    return buildTwitterApiResponse(response, await response.value());
   }
 }

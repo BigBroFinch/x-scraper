@@ -12,7 +12,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { UserHighlightsTweetsResult } from 'x-scraper'
+import type { UserHighlightsTweetsResult } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

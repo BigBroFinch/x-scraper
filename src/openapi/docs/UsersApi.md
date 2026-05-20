@@ -22,11 +22,11 @@ get users by rest ids
 import {
   Configuration,
   UsersApi,
-} from 'x-scraper';
-import type { GetUsersByRestIdsRequest } from 'x-scraper';
+} from '@finch_ren/x-scraper';
+import type { GetUsersByRestIdsRequest } from '@finch_ren/x-scraper';
 
 async function example() {
-  console.log("🚀 Testing x-scraper SDK...");
+  console.log("🚀 Testing @finch_ren/x-scraper SDK...");
   const config = new Configuration({ 
     // To configure API key authorization: Accept
     apiKey: "YOUR API KEY",

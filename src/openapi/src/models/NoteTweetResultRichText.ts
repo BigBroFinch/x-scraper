@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { NoteTweetResultRichTextTag } from './NoteTweetResultRichTextTag';
 import {
     NoteTweetResultRichTextTagFromJSON,
@@ -53,7 +53,7 @@ export function NoteTweetResultRichTextFromJSONTyped(json: any, ignoreDiscrimina
     }
     return {
         
-        'richtextTags': ((json['richtext_tags'] as Array<any>).map(NoteTweetResultRichTextTagFromJSON)),
+        'richtextTags': safeArrayMap(json['richtext_tags'], NoteTweetResultRichTextTagFromJSON),
     };
 }
 
@@ -68,7 +68,7 @@ export function NoteTweetResultRichTextToJSONTyped(value?: NoteTweetResultRichTe
 
     return {
         
-        'richtext_tags': ((value['richtextTags'] as Array<any>).map(NoteTweetResultRichTextTagToJSON)),
+        'richtext_tags': safeArrayMap(value['richtextTags'], NoteTweetResultRichTextTagToJSON),
     };
 }
 

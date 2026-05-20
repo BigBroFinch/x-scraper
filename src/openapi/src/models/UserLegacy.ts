@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 /**
  * 
  * @export
@@ -344,7 +344,7 @@ export function UserLegacyFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'name': json['name'],
         'normalFollowersCount': json['normal_followers_count'],
         'notifications': json['notifications'] == null ? undefined : json['notifications'],
-        'pinnedTweetIdsStr': json['pinned_tweet_ids_str'],
+        'pinnedTweetIdsStr': safeArray(json['pinned_tweet_ids_str']),
         'possiblySensitive': json['possibly_sensitive'],
         'profileBannerExtensions': json['profile_banner_extensions'] == null ? undefined : json['profile_banner_extensions'],
         'profileBannerUrl': json['profile_banner_url'] == null ? undefined : json['profile_banner_url'],
@@ -359,7 +359,7 @@ export function UserLegacyFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'verified': json['verified'],
         'verifiedType': json['verified_type'] == null ? undefined : json['verified_type'],
         'wantRetweets': json['want_retweets'] == null ? undefined : json['want_retweets'],
-        'withheldInCountries': json['withheld_in_countries'] == null ? undefined : json['withheld_in_countries'],
+        'withheldInCountries': safeOptionalArray(json['withheld_in_countries']),
     };
 }
 
@@ -399,7 +399,7 @@ export function UserLegacyToJSONTyped(value?: UserLegacy | null, ignoreDiscrimin
         'name': value['name'],
         'normal_followers_count': value['normalFollowersCount'],
         'notifications': value['notifications'],
-        'pinned_tweet_ids_str': value['pinnedTweetIdsStr'],
+        'pinned_tweet_ids_str': safeArray(value['pinnedTweetIdsStr']),
         'possibly_sensitive': value['possiblySensitive'],
         'profile_banner_extensions': value['profileBannerExtensions'],
         'profile_banner_url': value['profileBannerUrl'],
@@ -414,7 +414,7 @@ export function UserLegacyToJSONTyped(value?: UserLegacy | null, ignoreDiscrimin
         'verified': value['verified'],
         'verified_type': value['verifiedType'],
         'want_retweets': value['wantRetweets'],
-        'withheld_in_countries': value['withheldInCountries'],
+        'withheld_in_countries': safeOptionalArray(value['withheldInCountries']),
     };
 }
 

@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { PostCreateTweetRequestVariablesMediaMediaEntitiesInner } from './PostCreateTweetRequestVariablesMediaMediaEntitiesInner';
 import {
     PostCreateTweetRequestVariablesMediaMediaEntitiesInnerFromJSON,
@@ -59,7 +59,7 @@ export function PostCreateTweetRequestVariablesMediaFromJSONTyped(json: any, ign
     }
     return {
         
-        'mediaEntities': json['media_entities'] == null ? undefined : ((json['media_entities'] as Array<any>).map(PostCreateTweetRequestVariablesMediaMediaEntitiesInnerFromJSON)),
+        'mediaEntities': safeOptionalArrayMap(json['media_entities'], PostCreateTweetRequestVariablesMediaMediaEntitiesInnerFromJSON),
         'possiblySensitive': json['possibly_sensitive'],
     };
 }
@@ -75,7 +75,7 @@ export function PostCreateTweetRequestVariablesMediaToJSONTyped(value?: PostCrea
 
     return {
         
-        'media_entities': value['mediaEntities'] == null ? undefined : ((value['mediaEntities'] as Array<any>).map(PostCreateTweetRequestVariablesMediaMediaEntitiesInnerToJSON)),
+        'media_entities': safeOptionalArrayMap(value['mediaEntities'], PostCreateTweetRequestVariablesMediaMediaEntitiesInnerToJSON),
         'possibly_sensitive': value['possiblySensitive'],
     };
 }

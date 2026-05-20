@@ -14,7 +14,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TweetPreviewDisplay } from 'x-scraper'
+import type { TweetPreviewDisplay } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

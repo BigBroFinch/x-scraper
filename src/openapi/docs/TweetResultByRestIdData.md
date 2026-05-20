@@ -11,7 +11,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { TweetResultByRestIdData } from 'x-scraper'
+import type { TweetResultByRestIdData } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

@@ -14,7 +14,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { MediaSizes } from 'x-scraper'
+import type { MediaSizes } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {

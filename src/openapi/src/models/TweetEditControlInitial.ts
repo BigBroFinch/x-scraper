@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 /**
  * 
  * @export
@@ -66,7 +66,7 @@ export function TweetEditControlInitialFromJSONTyped(json: any, ignoreDiscrimina
     }
     return {
         
-        'editTweetIds': json['edit_tweet_ids'],
+        'editTweetIds': safeArray(json['edit_tweet_ids']),
         'editableUntilMsecs': json['editable_until_msecs'],
         'editsRemaining': json['edits_remaining'],
         'isEditEligible': json['is_edit_eligible'],
@@ -84,7 +84,7 @@ export function TweetEditControlInitialToJSONTyped(value?: TweetEditControlIniti
 
     return {
         
-        'edit_tweet_ids': value['editTweetIds'],
+        'edit_tweet_ids': safeArray(value['editTweetIds']),
         'editable_until_msecs': value['editableUntilMsecs'],
         'edits_remaining': value['editsRemaining'],
         'is_edit_eligible': value['isEditEligible'],

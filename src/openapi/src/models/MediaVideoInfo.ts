@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { mapValues, safeArray, safeOptionalArray, safeArrayMap, safeOptionalArrayMap } from '../runtime';
 import type { MediaVideoInfoVariant } from './MediaVideoInfoVariant';
 import {
     MediaVideoInfoVariantFromJSON,
@@ -66,9 +66,9 @@ export function MediaVideoInfoFromJSONTyped(json: any, ignoreDiscriminator: bool
     }
     return {
         
-        'aspectRatio': json['aspect_ratio'],
+        'aspectRatio': safeArray(json['aspect_ratio']),
         'durationMillis': json['duration_millis'] == null ? undefined : json['duration_millis'],
-        'variants': ((json['variants'] as Array<any>).map(MediaVideoInfoVariantFromJSON)),
+        'variants': safeArrayMap(json['variants'], MediaVideoInfoVariantFromJSON),
     };
 }
 
@@ -83,9 +83,9 @@ export function MediaVideoInfoToJSONTyped(value?: MediaVideoInfo | null, ignoreD
 
     return {
         
-        'aspect_ratio': value['aspectRatio'],
+        'aspect_ratio': safeArray(value['aspectRatio']),
         'duration_millis': value['durationMillis'],
-        'variants': ((value['variants'] as Array<any>).map(MediaVideoInfoVariantToJSON)),
+        'variants': safeArrayMap(value['variants'], MediaVideoInfoVariantToJSON),
     };
 }
 

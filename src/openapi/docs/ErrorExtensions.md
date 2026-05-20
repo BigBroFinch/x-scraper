@@ -16,7 +16,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { ErrorExtensions } from 'x-scraper'
+import type { ErrorExtensions } from '@finch_ren/x-scraper'
 
 // TODO: Update the object below with actual values
 const example = {
